@@ -23,7 +23,7 @@ async function seedProducts() {
     const productsWithId = products.map((product) => ({ ...product, _id: uuidv4() }));
 
     await Product.insertMany(productsWithId);
-    console.log('Productos insertados con éxito');
+    console.log("Productos insertados con éxito");
   } catch (error) {
     console.error('Error:', error);
   } finally {

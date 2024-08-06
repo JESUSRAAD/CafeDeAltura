@@ -7,4 +7,5 @@ const productSchema = new mongoose.Schema({
   available: Boolean
 });
 
-export default mongoose.models.Product || mongoose.model('Product', productSchema);
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
+export default Product

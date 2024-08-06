@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '../../../lib/mongodb';
+import clientPromise from '../../../../lib/mongodb';
 import { v4 as uuidv4 } from 'uuid';
 import mongoose from 'mongoose';
-import Product from '../../../models/Product';
+import Product from '../../../../models/Product';
 
 let isConnected = false;
 const connectToDatabase = async () => {
