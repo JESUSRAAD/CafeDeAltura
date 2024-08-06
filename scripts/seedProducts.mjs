@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import Product from '../models/Product';
+import Product from '../models/Product.mjs';
 
 dotenv.config({ path: '.env.local' });
 const products = [
