@@ -6,6 +6,8 @@ import { useContext, useState } from "react";
 const Form = () => {
   const { dataUsers,setdataUsers, filterUsers, setFilterUsers } = useContext(UserContext);
   const [user, setUser] = useState({});
+
+
   const handleInput = (event) => {
     const inputName = event.target.name;
     setUser((prev) => {
@@ -14,6 +16,8 @@ const Form = () => {
         [inputName]: event.target.value,
       };
     });
+
+   
   };
 
   const handleSubmit = (event) => {
