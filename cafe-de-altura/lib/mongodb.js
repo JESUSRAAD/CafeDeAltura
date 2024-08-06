@@ -1,8 +1,4 @@
-const { MongoClient } = require('mongodb');
-
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
-}
+import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI;
 const options = {};
@@ -21,4 +17,4 @@ if (process.env.NODE_ENV === 'development') {
   clientPromise = client.connect();
 }
 
-module.exports = clientPromise;
+export default clientPromise;

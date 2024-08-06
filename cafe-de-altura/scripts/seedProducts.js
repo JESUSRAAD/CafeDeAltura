@@ -1,8 +1,9 @@
-require('dotenv').config({ path: '.env.local' });
-const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
-const Product = require('../models/Product');
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
+import Product from '../models/Product';
 
+dotenv.config({ path: '.env.local' });
 const products = [
   { "brand": "Costa Rica Tarrazú", "price": 9.00, "img_url": "https://res.cloudinary.com/dalssoks9/image/upload/v1666638763/cafe_de_altura/coffee_bag_costa_rica_tarrazu_jejzcp.png", "available": true },
   { "brand": "Colombia Los Naranjos", "price": 9.00, "img_url": "https://res.cloudinary.com/dalssoks9/image/upload/v1666638763/cafe_de_altura/coffee_bag_colombia_los_naranjos_iajcb4.png", "available": true },
@@ -19,10 +20,10 @@ async function seedProducts() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
-    const productsWithId = products.map(product => ({ ...product, _id: uuidv4() }));
+    const productsWithId = products.map((product) => ({ ...product, _id: uuidv4() }));
 
     await Product.insertMany(productsWithId);
-    console.log("Productos insertados con éxito");
+    console.log('Productos insertados con éxito');
   } catch (error) {
     console.error('Error:', error);
   } finally {
