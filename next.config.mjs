@@ -10,4 +10,16 @@ export default {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
     return config;
   },
+  
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'res.cloudinary.com',
+          port: '',
+          pathname: '/**',
+        },
+      ],
+    },
+  
 };
