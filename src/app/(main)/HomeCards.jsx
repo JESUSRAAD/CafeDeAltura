@@ -40,7 +40,7 @@ const HomeCards = () => {
           <h2 className="text-[#2a5b45] text-2xl font-bold ">Novedades</h2>
           <div className="flex flex-wrap justify-center min-h-[391.39px] gap-6">
             {coffeData.slice(0,4).map((coffe) => {
-              return <HomeCardCoffe brand={coffe.brand} img={coffe.img_url} price={coffe.price}/>;
+              return <HomeCardCoffe key={coffe.id} brand={coffe.brand} img={coffe.img_url} price={coffe.price}/>;
             })}
           </div>
             <div className="flex underline gap-4 items-center">
