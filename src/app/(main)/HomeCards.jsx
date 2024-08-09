@@ -13,7 +13,7 @@ const HomeCards = () => {
   useEffect(() => {
     const getCoffeFetch = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/products`);
+        const response = await fetch(`https://cafe-de-altura-a6m3bkwfg-jesus-raad.vercel.app/api/products`);
 
         const data = await response.json();
         setCoffeData(data);
