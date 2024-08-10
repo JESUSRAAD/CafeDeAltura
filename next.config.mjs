@@ -1,25 +1,26 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-/**
- * @type {import('next').NextConfig}
- */
-export default {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   webpack: (config) => {
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
     config.resolve.alias['@'] = path.resolve(__dirname, 'src');
     return config;
   },
-  
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'res.cloudinary.com',
-          port: '',
-          pathname: '/**',
-        },
-      ],
-    },
-  
 };
+
+export default nextConfig;
