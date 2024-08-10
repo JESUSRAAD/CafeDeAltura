@@ -1,31 +1,39 @@
 import { NextResponse } from 'next/server';
-//import clientPromise from '../../../../lib/mongodb';
-import { v4 as uuidv4 } from 'uuid';
 import mongoose from 'mongoose';
 import Product from '../../../../models/Product.mjs';
 
 let isConnected = false;
 const connectToDatabase = async () => {
   if (isConnected) return;
-  
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     isConnected = true;
+    console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to database:', error);
   }
 }
 
 export async function GET() {
-  await connectToDatabase();
-  const products = await Product.find({});
-  return NextResponse.json(products);
+  try {
+    await connectToDatabase();
+    const products = await Product.find({});
+    return NextResponse.json(products);
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
+  }
 }
 
 export async function POST(request) {
-  await connectToDatabase();
-  const body = await request.json();
-  const newProduct = new Product({ ...body, _id: uuidv4() });
-  const savedProduct = await newProduct.save();
-  return NextResponse.json(savedProduct);
+  try {
+    await connectToDatabase();
+    const body = await request.json();
+    const newProduct = new Product(body);
+    const savedProduct = await newProduct.save();
+    return NextResponse.json(savedProduct);
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
+  }
 }
