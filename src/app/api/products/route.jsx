@@ -3,14 +3,14 @@ import clientPromise from '../../../../lib/mongodb.mjs';
 import { ObjectId } from 'mongodb';
 
 // Función auxiliar para añadir encabezados CORS
-function addCorsHeaders(response) {
+const addCorsHeaders=(response)=> {
   response.headers.set('Access-Control-Allow-Origin', '*'); // Permite cualquier origen
   response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
   return response;
 }
 
-export async function GET() {
+export const  GET=async()=> {
   try {
     const client = await clientPromise;
     const db = client.db("tu_nombre_de_base_de_datos");
@@ -22,7 +22,7 @@ export async function GET() {
   }
 }
 
-export async function POST(request) {
+export const  POST=async(request)=> {
   try {
     const client = await clientPromise;
     const db = client.db("tu_nombre_de_base_de_datos");
@@ -37,6 +37,6 @@ export async function POST(request) {
 }
 
 // Manejar solicitudes OPTIONS para preflight CORS
-export async function OPTIONS() {
+export const OPTIONS= async()=> {
   return addCorsHeaders(new NextResponse(null, { status: 200 }));
 }
