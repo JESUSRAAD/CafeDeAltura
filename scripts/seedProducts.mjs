@@ -1,9 +1,8 @@
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import { v4 as uuidv4 } from 'uuid';
+import {clientPromise} from '../lib/mongodb.js';
 import Product from '../models/Product.mjs';
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
 const products = [
   { "brand": "Costa Rica Tarrazú", "price": 9.00, "img_url": "https://res.cloudinary.com/dalssoks9/image/upload/v1666638763/cafe_de_altura/coffee_bag_costa_rica_tarrazu_jejzcp.png", "available": true },
   { "brand": "Colombia Los Naranjos", "price": 9.00, "img_url": "https://res.cloudinary.com/dalssoks9/image/upload/v1666638763/cafe_de_altura/coffee_bag_colombia_los_naranjos_iajcb4.png", "available": true },
@@ -16,19 +15,18 @@ const products = [
 ];
 
 async function seedProducts() {
+  const client = await clientPromise;
+  const db = client.db("test");
+
+  const productsWithIds = products.map(p => new Product(p.brand, p.price, p.img_url, p.available));
+
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Connected to MongoDB');
-
-    const productsWithId = products.map((product) => ({ ...product, _id: uuidv4() }));
-
-    await Product.insertMany(productsWithId);
-    console.log("Productos insertados con éxito");
-  } catch (error) {
-    console.error('Error:', error);
+    await db.collection("products").insertMany(productsWithIds);
+    console.log("Database initialized successfully");
+  } catch (e) {
+    console.error("Error initializing database:", e);
   } finally {
-    await mongoose.disconnect();
-    console.log('Disconnected from MongoDB');
+    await client.close();
   }
 }
 
