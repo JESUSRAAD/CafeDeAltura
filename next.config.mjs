@@ -17,9 +17,11 @@ const nextConfig = {
       },
     ],
   },
-  webpack: (config) => {
-    config.resolve.alias['@'] = path.resolve(__dirname, 'src');
-    return config;
+  env: {
+    MONGODB_URI: process.env.MONGODB_URI,
+  },
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname
   },
 };
 
