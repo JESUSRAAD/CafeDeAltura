@@ -1,8 +1,11 @@
+import HomeCards from '@/components/HomeCards'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+ <>
+  <HomeCards acc={8} title={"Últimos orígenes"} margin={true}/>
+ </>
   )
 }
 

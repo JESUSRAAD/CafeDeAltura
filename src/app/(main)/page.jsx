@@ -1,7 +1,9 @@
 import Form from "@/components/Form";
 import UserList from "@/components/UserList";
 import Image from "next/image";
-import HomeCards from "./HomeCards";
+import HomeCards from "../../components/HomeCards";
+import Hero from "./Hero";
+import CardsServicesSection from "@/components/CardsServicesSection";
 
 
 const HomePage = () => {
@@ -21,7 +23,9 @@ const HomePage = () => {
       <div className="flex justify-center h-screen">
         <UserList />
       </div> */}
-      <HomeCards />
+      <Hero/>
+      <CardsServicesSection/>
+      <HomeCards acc={4} title={"Novedades"} margin={false} link={true} titleArrow={"Ver todos"}/>
     </div>
   );
 };

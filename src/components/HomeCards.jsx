@@ -4,8 +4,10 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import HomeCardCoffe from "./HomeCardCoffe";
+import LinkArrow from "./LinkArrow";
 
-const HomeCards = () => {
+
+const HomeCards = ({acc,title,margin, link,titleArrow}) => {
   const [loading, setLoading] = useState(true);
   const { coffeData, setCoffeData } = useContext(CoffeContext);
 
@@ -30,36 +32,31 @@ const HomeCards = () => {
 
   console.log(coffeData);
 
+
+const withMargin="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16 p-[40px]"
+const withOutMargin="flex flex-col items-center justify-center min-h-[603.39px] gap-10 "
+
   return (
     <>
       {loading ? (
-        <p>Cargando...</p>
+        <p className="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16">Cargando...</p>
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16">
-          <h2 className="text-[#2a5b45] text-2xl font-bold ">Novedades</h2>
+        <div className={margin?withMargin:withOutMargin}>
+          <h2 className="text-[#2a5b45] text-2xl font-bold ">{title}</h2>
           <div className="flex flex-wrap justify-center min-h-[391.39px] gap-6">
-            {coffeData.slice(0, 4).map((coffe, i) => {
+            {coffeData.slice(0, acc).map((coffe, i) => {
               return (
                 <HomeCardCoffe
                   key={i}
                   brand={coffe.brand}
                   img={coffe.img_url}
                   price={coffe.price}
+                  available={coffe.available}
                 />
               );
             })}
           </div>
-          <div className="flex underline gap-4 items-center">
-            <Link className=" text-black font-semibold leading-4" href="/shop">
-              Ver todos
-            </Link>
-            <Image
-              src="/img/Arrow narrow right.png"
-              width={24}
-              height={24}
-              alt="Arrow narrow right"
-            />
-          </div>
+         {link?<LinkArrow titleArrow={titleArrow}/>:null}
         </div>
       )}
     </>

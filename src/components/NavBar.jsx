@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import ButtonCoffe from './ButtonCoffe'
 
 
 const NavBar = () => {
@@ -34,13 +35,15 @@ const NavBar = () => {
         </div>
 
        
-        <Link className='flex min-w-[130px] min-h-[40px] justify-center rounded text-center items-center no-underline bg-[#515051]' href="">
-          <p className="w-[82px] h-4 text-sm font-semibold leading-4 text-[white]">Iniciar sesión</p>
+        <Link  href="">
+        <ButtonCoffe text={"Iniciar sesión"} style={"gray"}  />
           </Link>
+
+          
       </div>
       <div className="carr">
       
-        <Image  src="/img/Carr.png" width={18} height={18} alt="icon-shopBag" />
+        <Image  src="/img/Carr.png" width={24} height={24} alt="icon-shopBag" />
 
       </div>
     </nav>
