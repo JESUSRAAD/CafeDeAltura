@@ -1,12 +1,12 @@
+"use client";
 import { Mail, Phone } from "lucide-react";
-import { useForm } from 'react-hook-form'
+import { useForm } from "react-hook-form";
 import Link from "next/link";
 import React from "react";
 
 const ContacctFormSection = () => {
-    
-    const {register} =useForm()
-    
+  const { register } = useForm();
+
   return (
     <div className="min-h-[552px] flex justify-center bg-[#e3ded7]">
       <div className="flex w-[1200px] min-h-[552px] gap-6 items-center">
@@ -57,7 +57,7 @@ const ContacctFormSection = () => {
               <input
                 className=" flex border border-gray-300 shadow-[0px_1px_2px_0px_#0000000d] h-[34px] rounded-md border-solid box-border pl-[17px] hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
                 type="text"
-               {...register("name")}
+                {...register("name")}
               />
             </div>
             <div className=" flex flex-col min-h-[54px] gap-1">
@@ -71,7 +71,11 @@ const ContacctFormSection = () => {
             <div className=" flex flex-col gap-1 min-h-[58px]">
               <label htmlFor="numPhone">Teléfono</label>
               <div className="flex gap-[0%] border border-gray-300 shadow-[0px_1px_2px_0px_#0000000d] rounded-md border-solid hover:border  hover:border-solid hover:border-[#9b9ea3] focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b]">
-                <select name="numPhone" id="numPhone" className=" text-center w-[68px] h-[38px] rounded-md border-0 hover:border hover:border-none  hover:border-[#9b9ea3] focus:outline-none">
+                <select
+                  name="numPhone"
+                  id="numPhone"
+                  className=" text-center w-[68px] h-[38px] rounded-md border-0 hover:border hover:border-none  hover:border-[#9b9ea3] focus:outline-none"
+                >
                   <option value="+1">US</option>
                   <option value="+58">VEN</option>
                   <option value="+57">COL</option>
@@ -87,16 +91,34 @@ const ContacctFormSection = () => {
             </div>
             <div className="flex flex-col min-h-[142px] gap-1">
               <label htmlFor="textArea">Comentarios </label>
-              <textarea className="flex justify-center border border-gray-300 h-[142px] shadow-[0px_1px_2px_0px_#0000000d] text-justify pt-[13px] px-[17px] rounded-md border-solid hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] " placeholder="¿En qué podemos ayudarte?"></textarea>
+              <textarea
+                className="flex justify-center border border-gray-300 h-[142px] shadow-[0px_1px_2px_0px_#0000000d] text-justify pt-[13px] px-[17px] rounded-md border-solid hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                placeholder="¿En qué podemos ayudarte?"
+              ></textarea>
             </div>
             <div className="flex items-center min-h-[20px] gap-3">
-              <input type="checkbox" id="conditions" className="shadow-[0px_1px_2px_0px_#0000000d] accent-[#2a5b45]  border border-gray-300 w-4 h-4 rounded border-solid" name="conditions" />
+              <input
+                type="checkbox"
+                id="conditions"
+                className="shadow-[0px_1px_2px_0px_#0000000d] accent-[#2a5b45]  border border-gray-300 w-4 h-4 rounded border-solid"
+                name="conditions"
+              />
               <label htmlFor="conditions">
                 Acepto la <a href="">Política de Privacidad</a> y los
-                <a className="text-sm font-semibold leading-4 underline text-gray-700" href=""> Términos y condiciones</a>.
+                <a
+                  className="text-sm font-semibold leading-4 underline text-gray-700"
+                  href=""
+                >
+                  {" "}
+                  Términos y condiciones
+                </a>
+                .
               </label>
             </div>
-            <input type="submit" className="flex justify-center items-center text-white w-[90px] min-h-[40px] rounded cursor-pointer bg-[#2a5b45]" ></input>
+            <input
+              type="submit"
+              className="flex justify-center items-center text-white w-[90px] min-h-[40px] rounded cursor-pointer bg-[#2a5b45]"
+            ></input>
           </form>
         </div>
       </div>
