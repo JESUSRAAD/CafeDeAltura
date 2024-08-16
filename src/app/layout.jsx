@@ -2,6 +2,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar";
 import CoffeContextProvider from "@/context/CoffeContext";
+import CopyraightFooter from "@/components/CopyraightFooter";
 
 
 const inter = Outfit({ subsets: ["latin"] });
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <CoffeContextProvider>
           <NavBar />
           {children}
+          <CopyraightFooter/>
           </CoffeContextProvider>
       </body>
     </html>
