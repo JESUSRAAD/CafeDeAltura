@@ -1,6 +1,6 @@
 import React from "react";
-import Link from "next/link";
 import CardCarShoping from "./CardCarShoping";
+import ButtonCoffe from "./ButtonCoffe";
 
 const CarShoping = ({ arr,visibleCondition }) => {
 
@@ -31,16 +31,15 @@ const CarShoping = ({ arr,visibleCondition }) => {
         <div className="flex flex-col overflow-scroll overflow-x-hidden max-h-[200px] gap-[7px]">
             {arrlengt.length===0? <p className="text-[#000000b4]">El carrito esta vacio</p>:arrlengt.map((coffeChoice,i)=>{
                 return(
-                    <CardCarShoping brand={coffeChoice.brand} img={coffeChoice.img} price={coffeChoice.price} key={i}/>
+                    <CardCarShoping brand={coffeChoice.name} img={coffeChoice.img} price={coffeChoice.price} key={coffeChoice.id}/>
                 )
             })}
         </div>
       </div>
       <div className="flex justify-center items-center gap-2">
-        <Link className=" bg-[#2a5b45] text-[white] text-sm font-semibold leading-4 p-2.5 rounded-lg" href="/shop">
-          Ver pedido
-        </Link>
-        <button className=" bg-[#E3DED7] text-[black] text-sm font-semibold leading-4 p-2.5 rounded-lg">Limpiar cesta</button>
+       <ButtonCoffe style={"green"} text={"Ver pedido"} link={"/Basket"}/>
+       <ButtonCoffe style={"gray"} text={"Limpiar Cesta"} />
+        {/* <button className=" bg-[#E3DED7] text-[black] text-sm font-semibold leading-4 p-2.5 rounded-lg">Limpiar cesta</button> */}
       </div>
     </div>
   );
