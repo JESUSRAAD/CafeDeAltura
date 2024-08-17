@@ -44,7 +44,7 @@ const withOutMargin="flex flex-col items-center justify-center min-h-[603.39px] 
         <div className={margin?withMargin:withOutMargin}>
           <h2 className="text-[#2a5b45] text-2xl leading-7 font-medium ">{title}</h2>
           <div className="flex flex-wrap justify-center min-h-[391.39px] gap-6">
-            {coffeData.slice(0, acc).map((coffe, i) => {
+            {coffeData.slice(0, acc).map((coffe,i) => {
               return (
                 <HomeCardCoffe
                   key={i}
