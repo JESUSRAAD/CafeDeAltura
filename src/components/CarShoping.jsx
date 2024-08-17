@@ -1,6 +1,6 @@
 import React from "react";
-import CardCarShoping from "./cardCarShoping";
 import Link from "next/link";
+import CardCarShoping from "./CardCarShoping";
 
 const CarShoping = ({ arr,visibleCondition }) => {
 
