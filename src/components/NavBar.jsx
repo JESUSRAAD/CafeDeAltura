@@ -36,15 +36,15 @@ const handleCarShoping=()=>{
 
        
         <Link  href="">
-        <ButtonCoffe text={"Iniciar sesión"} style={"gray"} link={"/Basket"} />
+        <ButtonCoffe text={"Iniciar sesión"} style={"gray"}/>
           </Link>
 
           
       </div>
-      <div className="carr">
+      <div className="flex gap-2  cursor-pointer " onClick={()=>handleCarShoping()}>
       
-        <Image onClick={()=>handleCarShoping()}  src="/img/Carr.png" width={24} height={24} alt="icon-shopBag" />
-
+        <Image   src="/img/Carr.png" width={24} height={24} alt="icon-shopBag" />
+<span className={coffeChoiced.length<1?' flex justify-center items-center opacity-0 min-w-6 min-h-6 rounded-full bg-[#F7F5F31A] font-semibold text-sm leading-4':' flex justify-center items-center min-w-6 min-h-6 rounded-full bg-[#F7F5F31A] font-semibold text-sm leading-4'}>{coffeChoiced.length}</span>
       </div>
       <CarShoping arr={coffeChoiced} visibleCondition={isCarAvailable}/>
     </nav>

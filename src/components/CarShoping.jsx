@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardCarShoping from "./CardCarShoping";
 import ButtonCoffe from "./ButtonCoffe";
+import { CoffeContext } from "@/context/CoffeContext";
 
 const CarShoping = ({ arr,visibleCondition }) => {
 
+    const {coffeChoiced,setCoffeChoiced}=useContext(CoffeContext)
+
+const handleClenCarShoping=()=>{
+
+    return(
+        setCoffeChoiced([])
+    )
+}
 
     const arrlengt=arr || []
   return (
@@ -31,14 +40,14 @@ const CarShoping = ({ arr,visibleCondition }) => {
         <div className="flex flex-col overflow-scroll overflow-x-hidden max-h-[200px] gap-[7px]">
             {arrlengt.length===0? <p className="text-[#000000b4]">El carrito esta vacio</p>:arrlengt.map((coffeChoice,i)=>{
                 return(
-                    <CardCarShoping brand={coffeChoice.name} img={coffeChoice.img} price={coffeChoice.price} key={coffeChoice.id}/>
+                    <CardCarShoping brand={coffeChoice.name} img={coffeChoice.img} price={coffeChoice.price} acc={coffeChoice.acc} key={i}/>
                 )
             })}
         </div>
       </div>
       <div className="flex justify-center items-center gap-2">
        <ButtonCoffe style={"green"} text={"Ver pedido"} link={"/Basket"}/>
-       <ButtonCoffe style={"gray"} text={"Limpiar Cesta"} />
+       <ButtonCoffe style={"gray"} text={"Limpiar Cesta"} action={handleClenCarShoping}/>
         {/* <button className=" bg-[#E3DED7] text-[black] text-sm font-semibold leading-4 p-2.5 rounded-lg">Limpiar cesta</button> */}
       </div>
     </div>

@@ -21,7 +21,7 @@ const linkPath = link || ''
       case "gray":
         return <Link href={linkPath} onClick={action} className="flex min-w-[130px] min-h-[40px] justify-center rounded text-center items-center no-underline bg-[#515051] text-sm  font-semibold leading-4 text-[white]">{text}</Link>;
       default:
-        return <Link href={linkPath} onClick={action} className="bg-transparent text-[#2A5B45] py-3 px-6 rounded">{text}</Link>;
+        return <Link href={linkPath} onClick={action} className="flex justify-center text-center items-center bg-transparent text-[#2A5B45] py-3  rounded">{text}</Link>;
     }
   
 

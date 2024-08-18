@@ -1,8 +1,7 @@
 "use client";
 import { CoffeContext } from "@/context/CoffeContext";
 import React, { useContext, useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+
 import HomeCardCoffe from "./HomeCardCoffe";
 import LinkArrow from "./LinkArrow";
 
@@ -52,6 +51,7 @@ const withOutMargin="flex flex-col items-center justify-center min-h-[603.39px] 
                   img={coffe.img_url}
                   price={coffe.price}
                   available={coffe.available}
+                  _id={coffe._id}
                 />
               );
             })}
