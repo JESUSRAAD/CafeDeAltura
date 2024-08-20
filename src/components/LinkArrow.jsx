@@ -5,7 +5,7 @@ import React from 'react'
 
 const LinkArrow = ({titleArrow, color, path}) => {
   
-  const linkPath = path || ''; 
+  const linkPath = path || ""; 
 
   switch (color) {
     case "black":
