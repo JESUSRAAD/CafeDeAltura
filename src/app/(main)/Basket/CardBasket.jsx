@@ -2,16 +2,20 @@ import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-const CardBasket = ({ brand, img, price, acc }) => {
+const CardBasket = ({ brand, img, price, acc, actionMinus, actionPlus }) => {
   const priceTotal = price * acc;
   return (
     <div class="flex justify-center items-center min-w-[776px] gap-6">
       <div class=" flex gap-2">
-        <Minus color="#000000" />
+        <span onClick={actionMinus}>
+          <Minus  color="#000000" />
+        </span>
         <span class="flex justify-center items-center w-6 h-6 text-[#2a5b45] text-xs font-normal leading-4 rounded-[200px] bg-[#2a5b451a]">
           {acc}
         </span>
-        <Plus color="#000000" />
+        <span onClick={actionPlus}>
+          <Plus  color="#000000" />
+        </span>
       </div>{" "}
       <Image src={img} width={55.66} height={55.66} alt={brand + " img"} />
       <div class=" w-[776px] min-h-[55.66px] gap-6">

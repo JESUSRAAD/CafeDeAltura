@@ -5,10 +5,29 @@ import React, { useContext } from "react";
 import CardBasket from "./CardBasket";
 import { useForm } from "react-hook-form";
 import ButtonCoffe from "@/components/ButtonCoffe";
+import TotalPayBox from "@/components/TotalPayBox";
 
 const BasketSection = () => {
-  const { coffeData, setCoffeData, coffeChoiced, setCoffeChoiced } =
-    useContext(CoffeContext);
+  const {
+    coffeData,
+    setCoffeData,
+    coffeChoiced,
+    setCoffeChoiced,
+    setIsCarAvailable,
+    subTotal,
+    setSubtotal,
+    send,
+    setSend,
+    total,
+    setTotal,
+    IVA,
+    setIVA,
+    updateProduct,
+    handlePlusAction,
+    handleMinusAction,
+  } = useContext(CoffeContext);
+
+  setIsCarAvailable(false);
 
   const { register, watch } = useForm({
     defaultValues: {
@@ -16,7 +35,7 @@ const BasketSection = () => {
     },
   });
 
-  const subTotal = () => {
+  const subTotalFun = () => {
     const totalSum = coffeChoiced.reduce(
       (sum, product) => sum + product.totalPay,
       0
@@ -24,20 +43,30 @@ const BasketSection = () => {
     return totalSum;
   };
 
-  const total = () => {
+  setSubtotal(subTotalFun().toFixed(2) + " €");
+
+  const totalFun = () => {
     if (watch("send") === "9.00 €") {
-      const totalPay = parseInt(subTotal()) + 9;
+      const totalPay = parseInt(subTotalFun()) + 9;
       return totalPay;
     } else {
-      const totalPay = parseInt(subTotal()) + 0;
+      const totalPay = parseInt(subTotalFun()) + 0;
       return totalPay;
     }
   };
 
-  const IVATotal=()=>{
-    const totalIVA = coffeChoiced.reduce((sum, product) => sum + product.IVAPay, 0);
-    return totalIVA
-  }
+  setTotal(totalFun().toFixed(2) + " €");
+
+  const IVATotalFun = () => {
+    const totalIVA = coffeChoiced.reduce(
+      (sum, product) => sum + product.IVAPay,
+      0
+    );
+    return totalIVA;
+  };
+
+  setIVA(IVATotalFun().toFixed(2) + " €");
+  setSend(watch("send"));
 
   return (
     <section className="flex flex-col items-center min-h-[772px] gap-6 mt-16 p-10">
@@ -57,6 +86,8 @@ const BasketSection = () => {
                     price={coffe.price}
                     key={coffe.id}
                     acc={coffe.acc}
+                    actionMinus={() => handleMinusAction(coffe.id)}
+                    actionPlus={() => handlePlusAction(coffe.id)}
                   />
                 );
               })
@@ -76,10 +107,11 @@ const BasketSection = () => {
                 {...register("send")}
                 value="GRATIS"
                 type="radio"
+                id="7day"
               />
               <label
-                className="lab flex flex-col w-[657px] min-h-[36px] gap-1elInpu"
-                for="7day"
+                className=" flex flex-col w-[657px] min-h-[36px] gap-1 "
+                htmlFor="7day"
               >
                 <p className="text-sm font-semibold leading-4">
                   Envío 5-7 días
@@ -91,7 +123,7 @@ const BasketSection = () => {
               <div className=" text-lg font-semibold leading-6">GRATIS</div>
             </div>
 
-            <hr className=" border  border-solid border-[#e3ded7]" />
+            <hr className="   border-solid border-[#e3ded7]" />
 
             <div className=" flex justify-center items-center gap-4">
               <input
@@ -99,10 +131,11 @@ const BasketSection = () => {
                 {...register("send")}
                 value="9.00 €"
                 type="radio"
+                id="24h"
               />
               <label
                 className=" flex flex-col w-[657px] min-h-[36px] gap-1"
-                for="24h"
+                htmlFor="24h"
               >
                 <p className=" text-sm font-semibold leading-4">
                   Envío urgente 24h
@@ -116,66 +149,8 @@ const BasketSection = () => {
             </div>
           </form>
         </div>
-        <div className="flex flex-col justify-between w-[360px] h-64 gap-4 p-6 bg-[#f7f5f3]">
-          <div className="flex flex-col gap-4">
-            <div className=" text-lg font-semibold leading-6">
-              Total del carrito
-            </div>
-            <hr className=" border border-solid border-[#e3ded7]" />
 
-            <div className=" flex justify-between">
-              <div className="text-sm font-normal leading-4">SUBTOTAL</div>
-              <div
-                id="paidQuantity"
-                className=" text-sm font-semibold leading-4"
-              >
-                {subTotal().toFixed(2) + " €"}
-              </div>
-            </div>
-
-            <div className="flex justify-between">
-              <div className=" text-sm font-normal leading-4">ENVÍO</div>
-              <div
-                id="sendQuantity"
-                className=" text-sm font-semibold leading-4"
-              >
-                {" "}
-                {watch("send")}
-              </div>
-            </div>
-
-            <hr className=" border  border-solid border-[#e3ded7]" />
-
-            <div className="flex justify-between">
-              <div className=" text-sm font-semibold leading-4">TOTAL</div>
-              <div className="flex flex-col gap-2 text-right">
-                <p
-                  id="totalQuantity"
-                  className=" text-sm font-semibold leading-4"
-                >
-                  {total().toFixed(2) + " €"}
-                </p>
-                <p className="text-xs font-normal leading-4 text-[#515051]">
-                  Incluye {IVATotal().toFixed(2) + " €"} de IVA
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className=" flex w-[310px] h-10 gap-4">
-            <ButtonCoffe style={"green"} text={"Ir a checkout"} />
-            {/* <Link
-              href=""
-              className=" flex justify-center items-center w-[129px] h-10 rounded text-sm font-semibold leading-4 text-[#2a5b45]"
-            >
-              Seguir comprando
-            </Link> */}
-            <ButtonCoffe
-              style={"transparente"}
-              text={"Seguir comprando"}
-              link={"/shop"}
-            />
-          </div>
-        </div>
+        <TotalPayBox IVA={IVA} send={send} subTotal={subTotal} total={total} />
       </div>
     </section>
   );
