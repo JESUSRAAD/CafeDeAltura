@@ -98,7 +98,7 @@ const BasketSection = () => {
             )}
           </div>
           <form className="flex flex-col gap-6">
-            <h3 className="font-semibold text-lg leading-6" for="payMethod">
+            <h3 className="font-semibold text-lg leading-6" >
               Seleccionar envío
             </h3>
             <div className="flex justify-center items-center gap-4">

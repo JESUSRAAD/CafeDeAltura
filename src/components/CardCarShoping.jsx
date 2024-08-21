@@ -18,7 +18,7 @@ const CardCarShoping = ({ brand, img, price, acc, trashAction, plusAction, minus
       </div>
       <div className="flex flex-col gap-5  w-fit justify-center">
         <div className="flex  gap-2">
-        <Trash size={13} color="#FF5555" onClick={trashAction}/>
+        <Trash size={13} color="#DD2654" onClick={trashAction}/>
         <p className="flex justify-center items-center w-4 h-4 text-[#2a5b45] text-xs font-normal leading-4 rounded-[200px] bg-[#2a5b451a]">
           {acc}
         </p>

@@ -8,6 +8,7 @@ export default function CoffeContextProvider({ children }) {
   const [coffeData, setCoffeData] = useState([]);
   const [coffeUsers, setCoffeUsers] = useState([]);
   const [coffeChoiced, setCoffeChoiced] = useState([]);
+  const [payForm, setPayForm] = useState([]);
 
   const [subTotal, setSubtotal] = useState("");
   const [send, setSend] = useState("");
@@ -61,9 +62,12 @@ export default function CoffeContextProvider({ children }) {
     setCoffeUsers(coffeUsers);
     // const coffeProducts = JSON.parse(localStorage.getItem('productsChoice')) || [];
     // setCoffeChoiced(coffeProducts);
+    const payDirection = JSON.parse(localStorage.getItem('payDirection')) || [];
+    setPayForm(payDirection);
   }, [
     setCoffeUsers,
-    // setCoffeChoiced
+    // setCoffeChoiced,
+    setPayForm,
   ]);
 
   return (
@@ -89,6 +93,8 @@ export default function CoffeContextProvider({ children }) {
         handlePlusAction,
         handleTrashAction,
         handleMinusAction,
+        payForm,
+        setPayForm,
       }}
     >
       {children}
