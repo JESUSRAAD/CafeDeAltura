@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import ButtonCoffe from './ButtonCoffe'
 import { CoffeContext } from '@/context/CoffeContext'
 
-const TotalPayBox = ({subTotal,send,total,IVA,checkOut}) => {
+const TotalPayBox = ({subTotal,send,total,IVA,checkOut,pay}) => {
     const {coffeChoiced}=useContext(CoffeContext)
   return (
-    <div className="flex flex-col justify-between w-[360px] h-fit gap-4 p-6 bg-[#f7f5f3]">
+    <div className={checkOut?"flex flex-col justify-between w-[360px] h-fit gap-4 p-6 rounded-[10px] bg-[#f7f5f3]":"flex flex-col justify-between w-[360px] h-fit gap-4 p-6  bg-[#f7f5f3]"}>
           <div className="flex flex-col gap-4">
             <div className=" text-lg font-semibold leading-6">
               Total del carrito
@@ -51,7 +51,7 @@ const TotalPayBox = ({subTotal,send,total,IVA,checkOut}) => {
             </div>
           </div>
         { checkOut? <div className=" flex w-[310px] h-10 gap-4">
-            <ButtonCoffe style={"green"} text={"Pagar y realizar pedido"} />
+            <ButtonCoffe style={"green"} text={"Pagar y realizar pedido"} action={pay}/>
            
             
           </div>:<div className=" flex w-[310px] h-10 gap-4">
