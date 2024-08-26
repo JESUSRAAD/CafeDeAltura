@@ -35,7 +35,7 @@ const NavBar = () => {
         </div>
 
         <Link href="">
-          <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
+          <ButtonCoffe text={"Iniciar sesión"} style={"gray"} link={"/success"}/>
         </Link>
       </div>
       <div

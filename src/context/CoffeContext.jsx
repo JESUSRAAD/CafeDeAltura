@@ -36,6 +36,8 @@ export default function CoffeContextProvider({ children }) {
         item.id === id ? updateProduct({ ...item, acc: item.acc + 1 }) : item
       )
     );
+
+
   };
 
   // Función para disminuir la cantidad del producto
@@ -50,25 +52,42 @@ export default function CoffeContextProvider({ children }) {
           )
           .filter((item) => item.acc > 0) // Elimina el item si acc es 0 o menor
     );
+
+	
   };
 
   // Función para eliminar el producto del carrito
   const handleTrashAction = (id) => {
     setCoffeChoiced((prev) => prev.filter((item) => item.id !== id));
+
+
   };
 
   useEffect(() => {
     const coffeUsers = JSON.parse(localStorage.getItem("users")) || [];
     setCoffeUsers(coffeUsers);
-    // const coffeProducts = JSON.parse(localStorage.getItem('productsChoice')) || [];
-    // setCoffeChoiced(coffeProducts);
+
+    const coffeProducts = JSON.parse(localStorage.getItem('productsChoice')) || [];
+    setCoffeChoiced(coffeProducts);
+	
+
     const payDirection = JSON.parse(localStorage.getItem('payDirection')) || [];
     setPayForm(payDirection);
+
+
+    
   }, [
     setCoffeUsers,
-    // setCoffeChoiced,
+    setCoffeChoiced,
     setPayForm,
+	
   ]);
+
+  useEffect(() => {
+	if (coffeChoiced.length > 0) { // Evitar guardar un array vacío
+	  localStorage.setItem("productsChoice", JSON.stringify(coffeChoiced));
+	}
+  }, [coffeChoiced]);
 
   return (
     <CoffeContext.Provider

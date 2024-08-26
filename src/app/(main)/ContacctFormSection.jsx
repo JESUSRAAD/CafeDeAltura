@@ -117,7 +117,7 @@ const ContacctFormSection = () => {
             <div className=" flex flex-col gap-1 min-h-[58px]">
               <label htmlFor="numPhone">Teléfono</label>
               <div className="flex gap-[0%] border border-gray-300 shadow-[0px_1px_2px_0px_#0000000d] rounded-md border-solid hover:border  hover:border-solid hover:border-[#9b9ea3] focus:border-2 focus:border-solid focus:border-[#3f8f6b] focus-within:hover:shadow-none focus-within:hover:border-[#3F8F6B] focus-within:hover:border-2">
-                <select className=" text-center w-[68px] h-[38px] rounded-md border-0 ">
+                <select   {...register("countriCode")} className=" text-center w-[68px] h-[38px] rounded-md border-0 ">
                   <option value="+1">US</option>
                   <option value="+58">VEN</option>
                   <option value="+57">COL</option>

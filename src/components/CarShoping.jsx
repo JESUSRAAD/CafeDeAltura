@@ -13,8 +13,11 @@ const CarShoping = ({ arr, visibleCondition }) => {
     handleMinusAction,
   } = useContext(CoffeContext);
 
-  const handleClenCarShoping = () => {
-    return setCoffeChoiced([]);
+  const handleClenCarShoping = (event) => {
+    event.preventDefault();
+
+     setCoffeChoiced([]);
+    localStorage.clear("productsChoice")
   };
 
   const arrCar = arr || [];

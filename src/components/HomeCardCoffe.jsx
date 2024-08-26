@@ -7,8 +7,12 @@ import { CoffeContext } from "@/context/CoffeContext";
 const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
   const { coffeChoiced, setCoffeChoiced } = useContext(CoffeContext);
 
+  
+  
+
   const addToCarShop = (event) => {
     event.preventDefault();
+    
 
     setCoffeChoiced((prev) => {
       const existingItemIndex = prev.findIndex((item) => item.id === _id);
@@ -36,6 +40,10 @@ const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
         return [...prev, newItem];
       }
     });
+  	
+
+   
+
   };
 
   console.log(coffeChoiced);
