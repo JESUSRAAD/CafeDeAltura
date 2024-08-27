@@ -10,12 +10,14 @@ import { CoffeContext } from "@/context/CoffeContext";
 import CarShoping from "./CarShoping";
 
 const NavBar = () => {
-  const { isCarAvailable, setIsCarAvailable, coffeChoiced, setCoffeChoiced } =
+  const { isCarAvailable, setIsCarAvailable, coffeChoiced, totalProductsChoiced } =
     useContext(CoffeContext);
 
   const handleCarShoping = () => {
     return isCarAvailable ? setIsCarAvailable(false) : setIsCarAvailable(true);
   };
+
+ 
 
   return (
     <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b]">
@@ -35,7 +37,7 @@ const NavBar = () => {
         </div>
 
         <Link href="">
-          <ButtonCoffe text={"Iniciar sesión"} style={"gray"} link={"/success"}/>
+          <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
         </Link>
       </div>
       <div
@@ -51,7 +53,7 @@ const NavBar = () => {
               : " flex justify-center items-center min-w-6 min-h-6 rounded-full bg-[#F7F5F31A] font-semibold text-sm leading-4"
           }
         >
-          {coffeChoiced.length}
+          {totalProductsChoiced()}
         </span>
       </div>
       <CarShoping arr={coffeChoiced} visibleCondition={isCarAvailable} />

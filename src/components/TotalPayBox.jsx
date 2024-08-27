@@ -11,8 +11,20 @@ const TotalPayBox = ({
   checkOut,
   pay,
   payFiniskSecction,
+  btnBloked
 }) => {
   const { coffeChoiced } = useContext(CoffeContext);
+const saveValues=()=>{
+    const values={
+        subTotal:subTotal,
+  send:send,
+  total:total,
+  IVA:IVA
+    }
+  return  localStorage.setItem("saveValues", JSON.stringify(values));
+
+}
+  
   return (
     <>
       {payFiniskSecction ? (
@@ -128,12 +140,22 @@ const TotalPayBox = ({
           </div>
           {checkOut ? (
             <div className=" flex w-[310px] h-10 gap-4">
+             {btnBloked?
+             <div className="opacity-30">
+              <ButtonCoffe
+                style={"green"}
+                text={"Pagar y realizar pedido"}
+             
+              />
+              </div>
+              :
               <ButtonCoffe
                 style={"green"}
                 text={"Pagar y realizar pedido"}
                 action={pay}
-                link={"/success"}
+                
               />
+            }
             </div>
           ) : (
             <div className=" flex w-[310px] h-10 gap-4">
@@ -144,6 +166,7 @@ const TotalPayBox = ({
                   style={"green"}
                   text={"Ir a checkout"}
                   link={"/checkOut"}
+                  action={saveValues}
                 />
               )}
 

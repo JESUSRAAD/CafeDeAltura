@@ -8,13 +8,14 @@ import {
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PayMethod = () => {
   const {
     setIsCarAvailable,
-    subTotal,
+    valuesBox,
     setSubtotal,
     send,
     setSend,
@@ -25,9 +26,6 @@ const PayMethod = () => {
     payForm,
     setPayForm,
   } = useContext(CoffeContext);
-
-  setIsCarAvailable(false);
-
   const {
     register,
     handleSubmit,
@@ -36,6 +34,62 @@ const PayMethod = () => {
     watch,
   } = useForm();
 
+  setIsCarAvailable(false);
+  const [isBloked, setIsBloked] = useState(true);
+
+  useEffect(() => {
+    // Obtenemos los valores actuales del formulario
+    const values = watch();
+
+    // Verificamos si hay algún error
+    const hasErrors = Object.keys(errors).length > 0;
+
+    // Validamos si todos los campos obligatorios están llenos
+    const isFormComplete = () => {
+      if (values.payMethod === "tarjeta") {
+        return (
+          values.holder &&
+          values.numberCard &&
+          values.expDate &&
+          values.CVC &&
+          values.name &&
+          values.surnames &&
+          values.numPhone &&
+          values.mail &&
+          values.countri &&
+          values.poblation &&
+          values.CP &&
+          values.street &&
+          values.numberStreet
+        );
+      } else {
+        // En caso de otros métodos de pago
+        return (
+            values.payMethod&&
+          values.name &&
+          values.surnames &&
+          values.numPhone &&
+          values.mail &&
+          values.countri &&
+          values.poblation &&
+          values.CP &&
+          values.street &&
+          values.numberStreet
+        );
+      }
+    };
+
+    // Si no hay errores y el formulario está completo, desbloqueamos el botón
+    if (!hasErrors && isFormComplete()) {
+      setIsBloked(false);
+    } else {
+      setIsBloked(true);
+    }
+  }, [watch(), errors]);
+
+  const [openItem, setOpenItem] = useState("item-1"); // Estado para controlar el ítem abierto
+  const router = useRouter(); // Obtén la instancia del enrutador
+
   const onSubmit = handleSubmit((data) => {
     setPayForm((prevData) => {
       const result = [...prevData, data];
@@ -43,11 +97,10 @@ const PayMethod = () => {
       reset();
       return result;
     });
-    const payDirection = JSON.parse(localStorage.getItem("payDirection")) || [];
-    setPayForm(payDirection);
     console.log(payForm);
     alert("Datos enviados");
-    
+    setOpenItem("item-1");
+    router.push("/success"); // Redirige a la página /success
   });
 
   //  función para manejar la entrada en el campo de fecha de caducidad
@@ -170,7 +223,11 @@ const PayMethod = () => {
     }
     e.target.value = input; // Establece el valor del campo al número limpio
   };
-  const [openItem, setOpenItem] = useState('item-1'); // Estado para controlar el ítem abierto
+
+  const payMethod = watch("payMethod");
+
+
+
   return (
     <section className="flex flex-col  items-center min-h-[772px] gap-6 mt-16 p-10">
       <h2 className="font-medium text-2xl leading-7 text-[#2a5b45]">
@@ -181,235 +238,204 @@ const PayMethod = () => {
           <p className="font-semibold text-lg leading-6">
             Seleccionar método de pago
           </p>
-          <Accordion
-            type="single"
-          
-            className="flex flex-col items-center justify-center w-[668px] min-h-[216px]  "
-            value={openItem} // Controla qué ítem está abierto
-            onValueChange={setOpenItem} // Actualiza el estado cuando cambia
-          >
-            <AccordionItem
+          {/* ///////////////////////////////primer input///////////////////////////////////// */}
+          <div className="w-[620px] min-h-6 flex no-underline hover:no-underline  items-center">
+            <input
             
-              value="item-1"
-              className="flex flex-col items-center w-[668px] h-auto gap-4 bg-[white]  text-[#2b2a2b] p-6 rounded-[10px] overflow-hidden"
+              defaultChecked
+              className="accent-[#2a5b45] "
+              {...register("payMethod")}
+              value="tarjeta"
+              type="radio"
+              id="tarjeta"
+            />
+            <label
+              className=" flex flex-col w-[657px] min-h-[36px] gap-1 justify-center pl-4"
+              htmlFor="tarjeta"
             >
-              <AccordionTrigger className="w-[620px] h-6 flex no-underline hover:no-underline  items-center">
+              <p className="text-sm font-semibold leading-4">
+                Tarjeta de débito
+              </p>
+             { payMethod === "tarjeta" ?<p className="text-sm font-normal leading-4">
+                Opción estándar sin seguimiento
+              </p>:null}
+            </label>
+          </div>
+          {/* //////////////////////////////////////////////////////////////////// */}
+        { payMethod === "tarjeta" ? <div className="flex flex-col gap-2  w-[620px] h-auto font-normal text-xs leading-4  text-[#2b2a2b] ">
+            <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
+              <label htmlFor="holder" className="text-xs font-normal">
+                Titular
+              </label>
+              <div className="flex gap-2  items-center ">
                 <input
-                defaultChecked
-                  className="accent-[#2a5b45] "
-                  {...register("payMethod")}
-                  value="tarjeta"
-                  type="radio"
-                  id="tarjeta"
+                  id="holder"
+                  placeholder="Nombre del titular"
+                  className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                  type="text"
+                  {...register("holder", {
+                    required: payMethod === "tarjeta" && {
+                      value: true,
+                      message: "Nombre del titular requerido",
+                    },
+                    validate:
+                      payMethod === "tarjeta" && hasAtLeastTwoNonSpaceChars,
+                  })}
                 />
-                <label
-                  className=" flex flex-col w-[657px] min-h-[36px] gap-1 text-start pl-4"
-                  htmlFor="tarjeta"
-                >
-                  <p className="text-sm font-semibold leading-4">
-                    Tarjeta de débito
-                  </p>
-                  <p className="text-sm font-normal leading-4">
-                    Opción estándar sin seguimiento
-                  </p>
+                {errors.holder ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.holder.message}
+                  </span>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
+              <label htmlFor="numberCard" className="text-xs font-normal">
+                Número de la tarjeta
+              </label>
+              <div className="flex gap-2  items-center ">
+                <input
+                  id="numberCard"
+                  placeholder="1234 1234 1234 1234"
+                  className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                  type="text"
+                  {...register("numberCard", {
+                    required: payMethod === "tarjeta" && {
+                      value: true,
+                      message: "Número de la tarjeta requerido",
+                    },
+
+                    pattern: payMethod === "tarjeta" && {
+                      value: /^\d{4} \d{4} \d{4} \d{4}$/,
+                      message: "Formato inválido, usa 1234 1234 1234 1234",
+                    },
+                  })}
+                  onInput={handleCardNumberInput} // Aplica el formateo al escribir
+                />
+                {errors.numberCard ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.numberCard.message}
+                  </span>
+                ) : null}
+              </div>
+            </div>
+            <div className="flex gap-6">
+              <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
+                <label htmlFor="expDate" className="text-xs font-normal">
+                  Fecha de caducidad
                 </label>
-              </AccordionTrigger>
-              <AccordionContent  className="flex flex-col gap-2  w-[620px] h-auto font-normal text-xs leading-4  text-[#2b2a2b] ">
-                <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
-                  <label htmlFor="holder" className="text-xs font-normal">
-                    Titular
-                  </label>
-                  <div className="flex gap-2  items-center ">
-                    <input
-                      id="holder"
-                      placeholder="Nombre del titular"
-                      className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
-                      type="text"
-                      {...register("holder", {
-                        required: {
-                          value: true,
-                          message: "Nombre del titular requerido",
-                        },
-                        validate: hasAtLeastTwoNonSpaceChars,
-                      })}
-                    />
-                    {errors.holder ? (
-                      <span className="text-xs text-[#FF5555] min-w-40">
-                        {errors.holder.message}
-                      </span>
-                    ) : null}
-                  </div>
-                </div>
+                <input
+                  type="text"
+                  placeholder="MM / YY"
+                  maxLength="7"
+                  className="flex border border-gray-300 h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border hover:border-solid hover:border-[#9b9ea3] focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b]"
+                  {...register("expDate", {
+                    required:
+                      payMethod === "tarjeta" &&
+                      "La fecha de caducidad es requerida",
+                    validate: payMethod === "tarjeta" && validateExpDate,
+                  })}
+                  onInput={handleExpDateInput} // Aquí agregas la función para manejar el input
+                />
+                {errors.expDate ? (
+                  <span className="text-xs text-[#FF5555] max-w-[112.25px]">
+                    {errors.expDate.message}
+                  </span>
+                ) : null}{" "}
+              </div>
 
-                <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
-                  <label htmlFor="numberCard" className="text-xs font-normal">
-                    Número de la tarjeta
-                  </label>
-                  <div className="flex gap-2  items-center ">
-                    <input
-                      id="numberCard"
-                      placeholder="1234 1234 1234 1234"
-                      className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
-                      type="text"
-                      {...register("numberCard", {
-                        required: {
-                          value: true,
-                          message: "Número de la tarjeta requerido",
-                        },
-                        minLength: {
-                          value: 16,
-                          message:
-                            "El número de la tarjeta debe tener al menos 16 numeros",
-                        },
-                        maxLength: {
-                          value: 19,
-                          message:
-                            "El número de la tarjeta no puede tener más de 19 caracteres",
-                        },
-                        pattern: {
-                          value: /^\d{4} \d{4} \d{4} \d{4}$/,
-                          message: "Formato inválido, usa 1234 1234 1234 1234",
-                        },
-                      })}
-                      onInput={handleCardNumberInput} // Aplica el formateo al escribir
-                    />
-                    {errors.numberCard ? (
-                      <span className="text-xs text-[#FF5555] min-w-40">
-                        {errors.numberCard.message}
-                      </span>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
-                    <label htmlFor="expDate" className="text-xs font-normal">
-                      Fecha de caducidad
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="MM / YY"
-                      maxLength="7"
-                      className="flex border border-gray-300 h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border hover:border-solid hover:border-[#9b9ea3] focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b]"
-                      {...register("expDate", {
-                        required: "La fecha de caducidad es requerida",
-                        validate: validateExpDate,
-                      })}
-                      onInput={handleExpDateInput} // Aquí agregas la función para manejar el input
-                    />
-                    {errors.expDate ? (
-                      <span className="text-xs text-[#FF5555] max-w-[112.25px]">
-                        {errors.expDate.message}
-                      </span>
-                    ) : null}{" "}
-                  </div>
+              <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
+                <label htmlFor="CVC" className="text-xs font-normal">
+                  CVC
+                </label>
+                <input
+                  id="CVC"
+                  placeholder="123"
+                  className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                  type="text"
+                  maxLength={3}
+                  {...register("CVC", {
+                    required: payMethod === "tarjeta" && {
+                      value: true,
+                      message: "CVC requerido",
+                    },
+                    minLength: payMethod === "tarjeta" && {
+                      value: 3,
+                      message:
+                        "El CVC de la tarjeta debe tener al menos 3 numeros",
+                    },
+                    pattern: payMethod === "tarjeta" && {
+                      value: /^[0-9]{3}$/, // Valida que solo se ingresen 3 dígitos
+                      message: "CVC inválido, deben ser 3 números",
+                    },
+                  })}
+                />
+                {errors.CVC ? (
+                  <span className="text-xs text-[#FF5555] max-w-[112.25px]">
+                    {errors.CVC.message}
+                  </span>
+                ) : null}{" "}
+              </div>
+            </div>
+          </div>:null}
 
-                  <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
-                    <label htmlFor="CVC" className="text-xs font-normal">
-                      CVC
-                    </label>
-                    <input
-                      id="CVC"
-                      placeholder="123"
-                      className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
-                      type="text"
-                      maxLength={3}
-                      {...register("CVC", {
-                        required: {
-                          value: true,
-                          message: "CVC requerido",
-                        },
-                        minLength: {
-                          value: 3,
-                          message:
-                            "El CVC de la tarjeta debe tener al menos 3 numeros",
-                        },
-                        pattern: {
-                          value: /^[0-9]{3}$/, // Valida que solo se ingresen 3 dígitos
-                          message: "CVC inválido, deben ser 3 números",
-                        },
-                      })}
-                    />
-                    {errors.CVC ? (
-                      <span className="text-xs text-[#FF5555] max-w-[112.25px]">
-                        {errors.CVC.message}
-                      </span>
-                    ) : null}{" "}
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <hr className=" w-full  border-solid border-[#e3ded7]" />
-
-            <AccordionItem
-              value="item-2"
-              className="flex flex-col items-center w-[668px] h-auto gap-4 bg-[white]  text-[#2b2a2b] p-6 rounded-[10px] overflow-hidden"
+          <hr className=" w-full  border-solid border-[#e3ded7]" />
+          {/* ///////////////////////////////segundo input///////////////////////////////////// */}
+          <div className="w-[620px] h-6 flex   items-center">
+            <input
+              className="accent-[#2a5b45] "
+              {...register("payMethod")}
+              id="transferencia"
+              value="transferencia"
+              type="radio"
+            />
+            <label
+              className=" flex flex-col w-[657px] min-h-[36px] gap-1 justify-center pl-4"
+              htmlFor="transferencia"
             >
-              <AccordionTrigger className="w-[620px] h-6 flex no-underline hover:no-underline  items-center">
-                <input
-                  className="accent-[#2a5b45] "
-                  {...register("payMethod")}
-                  id="transferencia"
-                  value="transferencia"
-                  type="radio"
-                />
-                <label
-                  className=" flex flex-col w-[657px] min-h-[36px] gap-1 text-start pl-4"
-                  htmlFor="transferencia"
-                >
-                  <p className="text-sm font-semibold leading-4">
-                    Transferencia bancaria a la cuenta ES12 1234 1234 123457890
-                  </p>
-                  <p className="text-sm font-normal leading-4">
-                    Será necesario recibir el comprobante de la transferencia
-                    para preparar tu pedido
-                  </p>
-                </label>
-              </AccordionTrigger>
-              <AccordionContent className="w-[620px] h-auto font-normal text-xs leading-4 text-[#2b2a2b]  ">
-                Viajamos constantemente para encontrar los mejores granos y a
-                los agricultores más exigentes. Si podemos ofrecerte estos
-                precios es porque tratamos directamente con los productores de
-                café, sin intermediarios. Así obtenemos el mejor precio para ti
-                y la persona que está detrás de los granos de café recibe el
-                mayor beneficio posible.
-              </AccordionContent>
-            </AccordionItem>
-            <hr className=" w-full  border-solid border-[#e3ded7]" />
-            <AccordionItem
-              value="item-3"
-              className="flex flex-col items-center w-[668px] h-auto gap-4 bg-[white]  text-[#2b2a2b] p-6 rounded-[10px] overflow-hidden"
+              <p className="text-sm font-semibold leading-4">
+                Transferencia bancaria a la cuenta ES12 1234 1234 123457890
+              </p>
+            { payMethod === "transferencia" ? <p className="text-sm font-normal leading-4">
+                Será necesario recibir el comprobante de la transferencia para
+                preparar tu pedido
+              </p>:null}
+            </label>
+          </div>
+          {/* //////////////////////////////////////////////////////////////////// */}
+
+          <hr className=" w-full  border-solid border-[#e3ded7]" />
+          {/* ///////////////////////////////tercer input///////////////////////////////////// */}
+          <div className="w-[620px] h-6 flex justify-center items-center">
+            <input
+              className="accent-[#2a5b45] "
+              {...register("payMethod")}
+              id="bizum"
+              value="bizum"
+              type="radio"
+            />
+            <label
+              className=" flex flex-col w-[657px] min-h-[36px]  justify-center pl-4"
+              htmlFor="bizum"
             >
-              <AccordionTrigger className="w-[620px] h-6 flex no-underline hover:no-underline  items-center">
-                <input
-                  className="accent-[#2a5b45] "
-                  {...register("payMethod")}
-                  id="bizum"
-                  value="bizum"
-                  type="radio"
+              <p className="text-sm font-semibold leading-4">Bizum</p>
+             {payMethod === "bizum" ? <div className="flex  gap-3 justify-center items-center">
+                <p className="text-sm font-normal leading-4">
+                  Será necesario recibir el comprobante de la transferencia para
+                  preparar tu pedido
+                </p>
+                <Image
+                  src="/img/bizumIcon.png"
+                  width={70}
+                  height={31}
+                  alt="bizum icon"
                 />
-                <label
-                  className=" flex  w-[657px] min-h-[36px] items-center text-start gap-4 pl-4"
-                  htmlFor="bizum"
-                >
-                  <p className="text-sm font-semibold leading-4">Bizum</p>
-                  <Image
-                    src="/img/bizumIcon.png"
-                    width={70}
-                    height={31}
-                    alt="bizum icon"
-                  />
-                </label>
-              </AccordionTrigger>
-              <AccordionContent className="w-[620px] h-auto font-normal text-xs leading-4 text-[#2b2a2b]  ">
-                Viajamos constantemente para encontrar los mejores granos y a
-                los agricultores más exigentes. Si podemos ofrecerte estos
-                precios es porque tratamos directamente con los productores de
-                café, sin intermediarios. Así obtenemos el mejor precio para ti
-                y la persona que está detrás de los granos de café recibe el
-                mayor beneficio posible.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+              </div>:null}
+            </label>
+          </div>
+
+          {/* //////////////////////////////////////////////////////////////////// */}
           <p className="font-semibold text-lg leading-6">Dirección de envío</p>
           <div className="flex flex-col gap-2">
             <div className="flex flex-col w-[521px] min-h-[55px] gap-[3px] ">
@@ -631,12 +657,12 @@ const PayMethod = () => {
                     },
                   })}
                 />
-  {errors.street ? (
+                {errors.street ? (
                   <span className="text-xs text-[#FF5555] min-w-[112.25px]">
                     {errors.street.message}
                   </span>
-                ) : null}           
-                   </div>
+                ) : null}
+              </div>
               <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
                 <label htmlFor="numberStreet" className="text-xs font-normal">
                   Nº
@@ -652,11 +678,12 @@ const PayMethod = () => {
                     },
                   })}
                 />
-  {errors.numberStreet ? (
+                {errors.numberStreet ? (
                   <span className="text-xs text-[#FF5555] min-w-[112.25px]">
                     {errors.numberStreet.message}
                   </span>
-                ) : null}              </div>
+                ) : null}{" "}
+              </div>
               <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
                 <label htmlFor="floor" className="text-xs font-normal">
                   Piso
@@ -667,7 +694,6 @@ const PayMethod = () => {
                   type="text"
                   {...register("floor")}
                 />
-                {/* {errors.name? <span className="text-xs text-[#FF5555]">Nombre requerido</span>:null} */}
               </div>
               <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
                 <label htmlFor="door" className="text-xs font-normal">
@@ -679,20 +705,19 @@ const PayMethod = () => {
                   type="text"
                   {...register("door")}
                 />
-                {/* {errors.name? <span className="text-xs text-[#FF5555]">Nombre requerido</span>:null} */}
               </div>
             </div>
           </div>
         </div>
 
         <TotalPayBox
-          IVA={IVA}
-          send={send}
-          subTotal={subTotal}
-          total={total}
+          IVA={valuesBox.IVA}
+          send={valuesBox.send}
+          subTotal={valuesBox.subTotal}
+          total={valuesBox.total}
           checkOut={true}
           pay={onSubmit}
-
+          btnBloked={isBloked}
         />
       </form>
     </section>

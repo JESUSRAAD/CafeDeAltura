@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 const CardBasket = ({ brand, img, price, acc, actionMinus, actionPlus,payFiniskSecction }) => {
-  const priceTotal = price * acc;
+  
   return (
     <>
     {payFiniskSecction?
@@ -16,7 +16,7 @@ const CardBasket = ({ brand, img, price, acc, actionMinus, actionPlus,payFiniskS
       </div>
     
       <div class="text-lg font-semibold leading-6">
-        {priceTotal.toFixed(2)}€
+        {price.toFixed(2)}€
       </div>
     </div>:
       <div class="flex justify-center items-center min-w-[776px] gap-6">
@@ -37,7 +37,7 @@ const CardBasket = ({ brand, img, price, acc, actionMinus, actionPlus,payFiniskS
         <p class=" text-sm font-normal leading-4">Paquete de café, 250 gr</p>
       </div>
       <div class="text-lg font-semibold leading-6">
-        {priceTotal.toFixed(2)}€
+        {price.toFixed(2)}€
       </div>
     </div>
     }
