@@ -9,6 +9,7 @@ export default function CoffeContextProvider({ children }) {
   const [coffeUsers, setCoffeUsers] = useState([]);
   const [coffeChoiced, setCoffeChoiced] = useState([]);
   const [payForm, setPayForm] = useState([]);
+  const [valuesBox, setValuesBox]= useState([]);
 
   const [subTotal, setSubtotal] = useState("");
   const [send, setSend] = useState("");
@@ -36,62 +37,69 @@ export default function CoffeContextProvider({ children }) {
         item.id === id ? updateProduct({ ...item, acc: item.acc + 1 }) : item
       )
     );
-
-
   };
 
   // Función para disminuir la cantidad del producto
   const handleMinusAction = (id) => {
-    setCoffeChoiced(
-      (prev) =>
-        prev
-          .map((item) =>
-            item.id === id
-              ? updateProduct({ ...item, acc: item.acc - 1 })
-              : item
-          )
-          .filter((item) => item.acc > 0) // Elimina el item si acc es 0 o menor
-    );
-
-	
+    setCoffeChoiced((prev) => {
+      // Disminuir la cantidad del producto seleccionado
+      const updatedProducts = prev
+        .map((item) =>
+          item.id === id ? updateProduct({ ...item, acc: item.acc - 1 }) : item
+        )
+        .filter((item) => item.acc > 0); // Filtrar productos con cantidad mayor a 0
+  
+      // Si no quedan productos, limpiar el localStorage
+      if (updatedProducts.length === 0) {
+        localStorage.removeItem("productsChoice");
+      } else {
+        // Si hay productos, actualizar el localStorage
+        localStorage.setItem("productsChoice", JSON.stringify(updatedProducts));
+      }
+  
+      return updatedProducts;
+    });
   };
 
   // Función para eliminar el producto del carrito
   const handleTrashAction = (id) => {
     setCoffeChoiced((prev) => prev.filter((item) => item.id !== id));
+  };
 
-
+  const totalProductsChoiced = () => {
+    const totalSum = coffeChoiced.reduce(
+      (sum, product) => sum + product.acc,
+      0
+    );
+    return totalSum;
   };
 
   useEffect(() => {
     const coffeUsers = JSON.parse(localStorage.getItem("users")) || [];
     setCoffeUsers(coffeUsers);
 
-    const coffeProducts = JSON.parse(localStorage.getItem('productsChoice')) || [];
+    const coffeProducts =
+      JSON.parse(localStorage.getItem("productsChoice")) || [];
     setCoffeChoiced(coffeProducts);
-	
 
-    const payDirection = JSON.parse(localStorage.getItem('payDirection')) || [];
+    const saveValues = JSON.parse(localStorage.getItem("saveValues"))|| []; 
+setValuesBox(saveValues)
+
+    const payDirection = JSON.parse(localStorage.getItem("payDirection")) || [];
     setPayForm(payDirection);
-
-
-    
-  }, [
-    setCoffeUsers,
-    setCoffeChoiced,
-    setPayForm,
-	
-  ]);
+  }, [setCoffeUsers, setCoffeChoiced, setPayForm]);
 
   useEffect(() => {
-	if (coffeChoiced.length > 0) { // Evitar guardar un array vacío
-	  localStorage.setItem("productsChoice", JSON.stringify(coffeChoiced));
-	}
+    if (coffeChoiced.length > 0) {
+      // Evitar guardar un array vacío
+      localStorage.setItem("productsChoice", JSON.stringify(coffeChoiced));
+    }
   }, [coffeChoiced]);
 
   return (
     <CoffeContext.Provider
       value={{
+        valuesBox, setValuesBox,
         coffeData,
         setCoffeData,
         coffeUsers,
@@ -112,6 +120,7 @@ export default function CoffeContextProvider({ children }) {
         handlePlusAction,
         handleTrashAction,
         handleMinusAction,
+        totalProductsChoiced,
         payForm,
         setPayForm,
       }}

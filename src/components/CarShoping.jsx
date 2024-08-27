@@ -13,7 +13,7 @@ const CarShoping = ({ arr, visibleCondition }) => {
     handleMinusAction,
   } = useContext(CoffeContext);
 
-  const handleClenCarShoping = (event) => {
+  const handleCleanCarShoping = (event) => {
     event.preventDefault();
 
      setCoffeChoiced([]);
@@ -36,7 +36,7 @@ const CarShoping = ({ arr, visibleCondition }) => {
       <div className="flex justify-center items-center w-full min-h-[200px]">
         <div className="flex flex-col overflow-scroll overflow-x-hidden max-h-[200px] gap-[7px]">
           {arrCar.length === 0 ? (
-            <p className="text-[#000000b4]">El carrito esta vacio</p>
+            <p className="text-[#000000b4]">El carrito esta vacio </p>
           ) : (
             arrCar.map((coffeChoice, i) => {
               return (
@@ -60,7 +60,7 @@ const CarShoping = ({ arr, visibleCondition }) => {
         <ButtonCoffe
           style={"gray"}
           text={"Limpiar Cesta"}
-          action={handleClenCarShoping}
+          action={handleCleanCarShoping}
         />
       </div>
     </div>

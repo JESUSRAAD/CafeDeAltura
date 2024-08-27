@@ -23,7 +23,7 @@ const Hero = () => {
 
          
           <Link  href="">
-        <ButtonCoffe text={"Comprar café"} style={"green"}  />
+        <ButtonCoffe text={"Comprar café"} style={"green"} link={"/shop"} />
           </Link>
          
         </div>

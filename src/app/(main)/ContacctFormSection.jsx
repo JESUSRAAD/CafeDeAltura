@@ -28,10 +28,10 @@ const ContacctFormSection = () => {
   });
 
   return (
-    <div className="min-h-[552px] flex justify-center bg-[#e3ded7]">
+    <div className="flex min-h-[552px]  justify-center bg-[#e3ded7]">
       <div className="flex w-[1200px] min-h-[552px] gap-6 items-center">
         <div className=" flex flex-col items-center w-[588px] min-h-[320px] gap-8  text-gray-500 text-sm font-normal leading-4">
-          <div className="min-h-[68px] gap-3 ">
+          <div className="   min-h-[68px] gap-3 ">
             <h3 className="text-lg font-semibold leading-6 text-gray-900">
               Entra en contacto con nosotros
             </h3>
@@ -70,10 +70,10 @@ const ContacctFormSection = () => {
             </p>
           </div>
         </div>
-        <div className=" w-[588px] min-h-[552px] flex flex-col justify-center items-center text-gray-700 shadow-[0px_4px_4px_0px_#00000040] bg-[#ffffff]">
+        <div className="flex flex-col w-[588px] min-h-[552px]  justify-center items-center text-gray-700 shadow-[0px_4px_4px_0px_#00000040] p-8 bg-[#ffffff]">
           <form
             onSubmit={onSubmit}
-            className="flex flex-col min-w-[470px] h-[488px] gap-6 text-xs font-normal leading-4"
+            className="flex flex-col min-w-[470px] min-h-[488px] gap-6 text-xs font-normal leading-4"
           >
             <div className="flex flex-col min-h-[54px] gap-1 ">
               <label htmlFor="name">Nombre completo</label>
@@ -95,7 +95,11 @@ const ContacctFormSection = () => {
                   },
                 })}
               />
-              {/* {errors.name? <span className="text-xs text-[#FF5555]">Nombre requerido</span>:null} */}
+                {errors.name ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.name.message}
+                  </span>
+                ) : null}
             </div>
             <div className=" flex flex-col min-h-[54px] gap-1">
               <label htmlFor="mail">Email</label>
@@ -113,6 +117,11 @@ const ContacctFormSection = () => {
                   },
                 })}
               />
+                {errors.mail ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.mail.message}
+                  </span>
+                ) : null}
             </div>
             <div className=" flex flex-col gap-1 min-h-[58px]">
               <label htmlFor="numPhone">Teléfono</label>
@@ -134,6 +143,16 @@ const ContacctFormSection = () => {
                   placeholder="+1 (555) 987-6543"
                 />
               </div>
+              {errors.numPhone  ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.numPhone.message}
+                  </span>
+                ) : null}
+              {errors.countriCode  ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.countriCode.message}
+                  </span>
+                ) : null}
             </div>
 
             <div className="flex flex-col min-h-[142px] gap-1">
@@ -147,9 +166,17 @@ const ContacctFormSection = () => {
             <div className="flex items-center min-h-[20px] gap-3">
               <input
                 type="checkbox"
-                {...register("conditions", { required: true })}
+                {...register("conditions", {
+                  required:  {
+                    value: true,
+                    message: "Conditions de  Política y Términos requeridos",
+                  },
+
+                  
+                })}
                 className="shadow-[0px_1px_2px_0px_#0000000d] accent-[#2a5b45]  border border-gray-300 w-4 h-4 rounded border-solid"
               />
+              <div className="flex flex-col ">
               <label htmlFor="conditions">
                 Acepto la{" "}
                 <Link
@@ -168,6 +195,12 @@ const ContacctFormSection = () => {
                 </Link>
                 .
               </label>
+              {errors.conditions ? (
+                  <span className="text-xs text-[#FF5555] min-w-40">
+                    {errors.conditions.message}
+                  </span>
+                ) : null}
+                </div>
             </div>
             <input
               type="submit"

@@ -18,14 +18,14 @@ const Footer = () => {
         <div className="flex flex-col w-[255.33px] h-[152px] gap-4">
     <h3 className='text-lg font-semibold leading-6'>Te ayudamos en</h3>
     <div className="flex justify-center items-center w-[182px] min-h-[48px] rounded bg-[#515051]">
-        <Link href="" className="flex justify-center items-center text-sm gap-2">
-         <div className='flex'><Phone color="#ffffff" />
+        <Link href="" className="flex justify-center items-center text-sm ">
+         <div className='flex gap-2'><Phone size={24} color="#ffffff" />
             <p>+34 919 49 05 18</p></div> 
         </Link>
       </div>
       <div className="flex justify-center items-center w-[232px] min-h-[48px] rounded bg-[#515051]">
-        <Link href="" className="flex justify-center items-center text-sm gap-2">
-          <div  className='flex'><Mail color="#ffffff" />
+        <Link href="" className="flex justify-center items-center text-sm ">
+          <div  className='flex gap-2 '><Mail size={24} color="#ffffff" />
             <p>hola@cafedealtura.com</p></div>
         </Link>
       </div>

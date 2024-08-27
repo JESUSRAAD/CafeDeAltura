@@ -22,7 +22,7 @@ const BasketSection = () => {
     setTotal,
     IVA,
     setIVA,
-    updateProduct,
+    totalProductsChoiced,
     handlePlusAction,
     handleMinusAction,
   } = useContext(CoffeContext);
@@ -74,11 +74,11 @@ const BasketSection = () => {
   return (
     <section className="flex flex-col items-center min-h-[772px] gap-6 mt-16 p-10">
       <h2 className="font-medium text-2xl leading-7 text-[#2a5b45]">
-        Cesta ({coffeChoiced.length})
+        Cesta ({totalProductsChoiced()})
       </h2>
       <div className="flex w-[1200px] min-h-[415.32px] gap-6">
         <div className="flex flex-col w-[784px] min-h-[407.32px] gap-6 p-2">
-          <h3 className="font-semibold text-lg leading-6">Procuctos</h3>
+          <h3 className="font-semibold text-lg leading-6">Productos</h3>
           <div className="flex flex-col  gap-6">
             {coffeChoiced.length > 0 ? (
               coffeChoiced.map((coffe) => {
