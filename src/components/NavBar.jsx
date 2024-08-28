@@ -11,24 +11,28 @@ import CarShoping from "./CarShoping";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {
-  const { isCarAvailable, setIsCarAvailable, coffeChoiced, totalProductsChoiced } =
-    useContext(CoffeContext);
+  const {
+    isCarAvailable,
+    setIsCarAvailable,
+    coffeChoiced,
+    totalProductsChoiced,
+  } = useContext(CoffeContext);
 
   const handleCarShoping = () => {
     return isCarAvailable ? setIsCarAvailable(false) : setIsCarAvailable(true);
   };
 
-  const pathname=usePathname()
+  const pathname = usePathname();
   useEffect(() => {
-   setIsCarAvailable(false)
- }, [pathname]);
+    setIsCarAvailable(false);
+  }, [pathname]);
 
- const isSuccessPage = pathname === "/success"; // Verifica si estás en la página de éxito
+  const isSuccessPage = pathname === "/success"; // Verifica si estás en la página de éxito
   return (
     <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b]">
       <Link href={isSuccessPage ? "#" : "/"}>
         {" "}
-        <LogoType isSuccessPage={isSuccessPage}/>
+        <LogoType isSuccessPage={isSuccessPage} />
       </Link>
 
       <PageList direction={"row"} isSuccessPage={isSuccessPage} />
@@ -41,16 +45,20 @@ const NavBar = () => {
           </p>
         </div>
 
-        
-          <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
-       
+        <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
       </div>
       <div
         className="flex gap-2  cursor-pointer "
         onClick={() => handleCarShoping()}
       >
         <Image src="/img/Carr.png" width={24} height={24} alt="icon-shopBag" />
-        <span className={ coffeChoiced.length < 1?"  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute invisible mt-[16.1px]":"  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute  mt-[16.1px]"}></span>
+        <span
+          className={
+            coffeChoiced.length < 1
+              ? "  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute invisible mt-[16.1px]"
+              : "  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute  mt-[16.1px]"
+          }
+        ></span>
         <span
           className={
             coffeChoiced.length < 1

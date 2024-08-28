@@ -9,20 +9,22 @@ import FeaturingSection from "./FeaturingSection";
 import Footer from "@/components/Footer";
 import ContacctFormSection from "./ContacctFormSection";
 
-
-
 const HomePage = () => {
   return (
     <>
-  
-      <Hero/>
-      <CardsServicesSection/>
-      <HomeCards acc={4} title={"Novedades"} margin={false} link={true} titleArrow={"Ver todos"}/>
-      <FAQ/>
-      <FeaturingSection/>
-      <ContacctFormSection/>
-      <Footer/>
-      
+      <Hero />
+      <CardsServicesSection />
+      <HomeCards
+        acc={4}
+        title={"Novedades"}
+        margin={false}
+        link={true}
+        titleArrow={"Ver todos"}
+      />
+      <FAQ />
+      <FeaturingSection />
+      <ContacctFormSection />
+      <Footer />
     </>
   );
 };

@@ -31,8 +31,6 @@ const UserSearch = () => {
     setFilterUsers(dataUsers);
   };
 
-
-
   console.log(dataUsers);
   console.log(filterUsers);
   return (

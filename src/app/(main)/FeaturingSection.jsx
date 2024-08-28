@@ -15,12 +15,16 @@ const FeaturingSection = () => {
             granos de café antes de hacer tu pedido y llévate un descuento
           </p>
 
-          
           <LinkArrow titleArrow={"Cómo llegar"} color={"black"} />
         </div>
-       
-                <Image  src="/img/af83409b898246e822c86278c804fd4c.jpeg" width={588} height={390} alt="coffe Store" className="rounded-[20px]"/>
 
+        <Image
+          src="/img/af83409b898246e822c86278c804fd4c.jpeg"
+          width={588}
+          height={390}
+          alt="coffe Store"
+          className="rounded-[20px]"
+        />
       </div>
     </div>
   );

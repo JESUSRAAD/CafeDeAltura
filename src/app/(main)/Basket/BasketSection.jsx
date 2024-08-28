@@ -66,19 +66,16 @@ const BasketSection = () => {
 
   setIVA(IVATotalFun().toFixed(2) + " €");
   setSend(watch("send"));
-console.log(valuesBox);
+  console.log(valuesBox);
 
-
-const saveValues=()=>{
- setValuesBox({
-      subTotal:subTotal,
-send:send,
-total:total,
-IVA:IVA
-  })
-
-
-}
+  const saveValues = () => {
+    setValuesBox({
+      subTotal: subTotal,
+      send: send,
+      total: total,
+      IVA: IVA,
+    });
+  };
 
   return (
     <section className="flex flex-col items-center min-h-screen gap-6 mt-16 p-10">
@@ -162,7 +159,13 @@ IVA:IVA
           </form>
         </div>
 
-        <TotalPayBox IVA={IVA} send={send} subTotal={subTotal} total={total}  checkAction={saveValues}/>
+        <TotalPayBox
+          IVA={IVA}
+          send={send}
+          subTotal={subTotal}
+          total={total}
+          checkAction={saveValues}
+        />
       </div>
     </section>
   );

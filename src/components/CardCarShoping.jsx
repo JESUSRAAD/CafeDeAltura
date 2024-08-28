@@ -2,7 +2,15 @@ import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-const CardCarShoping = ({ brand, img, price, acc, trashAction, plusAction, minusAction }) => {
+const CardCarShoping = ({
+  brand,
+  img,
+  price,
+  acc,
+  trashAction,
+  plusAction,
+  minusAction,
+}) => {
   return (
     <div className="flex w-[280px] border justify-between items-center text-center bg-[white] gap-1.5 mt-2.5 p-[7px] rounded-lg border-solid border-[#e3ded7]">
       <Image
@@ -18,14 +26,14 @@ const CardCarShoping = ({ brand, img, price, acc, trashAction, plusAction, minus
       </div>
       <div className="flex flex-col gap-5  w-fit justify-center">
         <div className="flex  gap-2">
-        <Trash size={13} color="#DD2654" onClick={trashAction}/>
-        <p className="flex justify-center items-center w-4 h-4 text-[#2a5b45] text-xs font-normal leading-4 rounded-[200px] bg-[#2a5b451a]">
-          {acc}
-        </p>
+          <Trash size={13} color="#DD2654" onClick={trashAction} />
+          <p className="flex justify-center items-center w-4 h-4 text-[#2a5b45] text-xs font-normal leading-4 rounded-[200px] bg-[#2a5b451a]">
+            {acc}
+          </p>
         </div>
-        <div  className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
           {/* <button class="flex justify-center  items-center"> */}
-          <Plus size={13} color="#000000"  onClick={plusAction}/>
+          <Plus size={13} color="#000000" onClick={plusAction} />
           {/* </button> */}
           {/* <button class="flex justify-center items-center text-black w-6 h-6"> */}
           <Minus size={13} color="#000000" onClick={minusAction} />

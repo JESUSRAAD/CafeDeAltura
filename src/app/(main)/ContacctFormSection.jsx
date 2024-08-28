@@ -18,13 +18,13 @@ const ContacctFormSection = () => {
     setCoffeUsers((prevData) => {
       const result = [...prevData, data];
       localStorage.setItem("users", JSON.stringify(result));
-      reset()
+      reset();
       return result;
     });
     const ceatedListUser = JSON.parse(localStorage.getItem("users")) || [];
     setCoffeUsers(ceatedListUser);
     console.log(coffeUsers);
-    alert("Datos enviados")
+    alert("Datos enviados");
   });
 
   return (
@@ -95,11 +95,11 @@ const ContacctFormSection = () => {
                   },
                 })}
               />
-                {errors.name ? (
-                  <span className="text-xs text-[#FF5555] min-w-40">
-                    {errors.name.message}
-                  </span>
-                ) : null}
+              {errors.name ? (
+                <span className="text-xs text-[#FF5555] min-w-40">
+                  {errors.name.message}
+                </span>
+              ) : null}
             </div>
             <div className=" flex flex-col min-h-[54px] gap-1">
               <label htmlFor="mail">Email</label>
@@ -117,16 +117,19 @@ const ContacctFormSection = () => {
                   },
                 })}
               />
-                {errors.mail ? (
-                  <span className="text-xs text-[#FF5555] min-w-40">
-                    {errors.mail.message}
-                  </span>
-                ) : null}
+              {errors.mail ? (
+                <span className="text-xs text-[#FF5555] min-w-40">
+                  {errors.mail.message}
+                </span>
+              ) : null}
             </div>
             <div className=" flex flex-col gap-1 min-h-[58px]">
               <label htmlFor="numPhone">Teléfono</label>
               <div className="flex gap-[0%] border border-gray-300 shadow-[0px_1px_2px_0px_#0000000d] rounded-md border-solid hover:border  hover:border-solid hover:border-[#9b9ea3] focus:border-2 focus:border-solid focus:border-[#3f8f6b] focus-within:hover:shadow-none focus-within:hover:border-[#3F8F6B] focus-within:hover:border-2">
-                <select   {...register("countriCode")} className=" text-center w-[68px] h-[38px] rounded-md border-0 ">
+                <select
+                  {...register("countriCode")}
+                  className=" text-center w-[68px] h-[38px] rounded-md border-0 "
+                >
                   <option value="+1">US</option>
                   <option value="+58">VEN</option>
                   <option value="+57">COL</option>
@@ -143,16 +146,16 @@ const ContacctFormSection = () => {
                   placeholder="+1 (555) 987-6543"
                 />
               </div>
-              {errors.numPhone  ? (
-                  <span className="text-xs text-[#FF5555] min-w-40">
-                    {errors.numPhone.message}
-                  </span>
-                ) : null}
-              {errors.countriCode  ? (
-                  <span className="text-xs text-[#FF5555] min-w-40">
-                    {errors.countriCode.message}
-                  </span>
-                ) : null}
+              {errors.numPhone ? (
+                <span className="text-xs text-[#FF5555] min-w-40">
+                  {errors.numPhone.message}
+                </span>
+              ) : null}
+              {errors.countriCode ? (
+                <span className="text-xs text-[#FF5555] min-w-40">
+                  {errors.countriCode.message}
+                </span>
+              ) : null}
             </div>
 
             <div className="flex flex-col min-h-[142px] gap-1">
@@ -167,40 +170,38 @@ const ContacctFormSection = () => {
               <input
                 type="checkbox"
                 {...register("conditions", {
-                  required:  {
+                  required: {
                     value: true,
                     message: "Conditions de  Política y Términos requeridos",
                   },
-
-                  
                 })}
                 className="shadow-[0px_1px_2px_0px_#0000000d] accent-[#2a5b45]  border border-gray-300 w-4 h-4 rounded border-solid"
               />
               <div className="flex flex-col ">
-              <label htmlFor="conditions">
-                Acepto la{" "}
-                <Link
-                  href="/privPolitic"
-                  className="text-sm font-semibold leading-4 underline text-gray-700"
-                >
-                  Política de Privacidad
-                </Link>{" "}
-                y los
-                <Link
-                  className="text-sm font-semibold leading-4 underline text-gray-700"
-                  href="termsAndConditions"
-                >
-                  {" "}
-                  Términos y condiciones
-                </Link>
-                .
-              </label>
-              {errors.conditions ? (
+                <label htmlFor="conditions">
+                  Acepto la{" "}
+                  <Link
+                    href="/privPolitic"
+                    className="text-sm font-semibold leading-4 underline text-gray-700"
+                  >
+                    Política de Privacidad
+                  </Link>{" "}
+                  y los
+                  <Link
+                    className="text-sm font-semibold leading-4 underline text-gray-700"
+                    href="termsAndConditions"
+                  >
+                    {" "}
+                    Términos y condiciones
+                  </Link>
+                  .
+                </label>
+                {errors.conditions ? (
                   <span className="text-xs text-[#FF5555] min-w-40">
                     {errors.conditions.message}
                   </span>
                 ) : null}
-                </div>
+              </div>
             </div>
             <input
               type="submit"
