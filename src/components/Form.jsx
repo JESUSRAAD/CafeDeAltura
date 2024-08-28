@@ -2,7 +2,7 @@
 
 import { UserContext } from "@/context/UserContex";
 import { useContext, useState } from "react";
-
+// esto es una actididan en clase
 const Form = () => {
   const { dataUsers, setdataUsers, filterUsers, setFilterUsers } =
     useContext(UserContext);
