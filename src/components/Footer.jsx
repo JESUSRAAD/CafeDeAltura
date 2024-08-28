@@ -32,9 +32,9 @@ const Footer = () => {
         </div>
         <PageList direction={"col"}/>
         <ul className="flex flex-col w-[255.33px] h-20 gap-4 text-sm font-semibold leading-4">
-            <li><a href="">Política de privacidad</a></li>
-            <li><a href="">Política de cookies</a></li>
-            <li><a href="">Términos y condiciones</a></li>
+            <li><a href="/privPolitic">Política de privacidad</a></li>
+            <li><a href="/cookiesPolitic">Política de cookies</a></li>
+            <li><a href="/termsAndConditions">Términos y condiciones</a></li>
         </ul>
     </div>
     </div>

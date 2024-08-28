@@ -15,8 +15,8 @@ const CardBasket = ({ brand, img, price, acc, actionMinus, actionPlus,payFiniskS
         <p class=" text-sm font-normal leading-4">Paquete de café, 250 gr</p>
       </div>
     
-      <div class="text-lg font-semibold leading-6">
-        {price.toFixed(2)}€
+      <div class="text-lg min-w-[55px] font-semibold leading-6">
+        {price.toFixed(2)} €
       </div>
     </div>:
       <div class="flex justify-center items-center min-w-[776px] gap-6">
@@ -32,12 +32,12 @@ const CardBasket = ({ brand, img, price, acc, actionMinus, actionPlus,payFiniskS
         </span>
       </div>{" "}
       <Image src={img} width={55.66} height={55.66} alt={brand + " img"} />
-      <div class=" w-[776px] min-h-[55.66px] gap-6">
+      <div class=" w-[576px] min-h-[55.66px] gap-6">
         <p class="text-sm font-semibold leading-4">{brand}</p>
         <p class=" text-sm font-normal leading-4">Paquete de café, 250 gr</p>
       </div>
-      <div class="text-lg font-semibold leading-6">
-        {price.toFixed(2)}€
+      <div class="text-lg min-w-[55px] font-semibold leading-6">
+        {price.toFixed(2)} €
       </div>
     </div>
     }

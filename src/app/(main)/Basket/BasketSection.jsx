@@ -72,7 +72,7 @@ const BasketSection = () => {
   setSend(watch("send"));
 
   return (
-    <section className="flex flex-col items-center min-h-[772px] gap-6 mt-16 p-10">
+    <section className="flex flex-col items-center min-h-screen gap-6 mt-16 p-10">
       <h2 className="font-medium text-2xl leading-7 text-[#2a5b45]">
         Cesta ({totalProductsChoiced()})
       </h2>
@@ -95,7 +95,7 @@ const BasketSection = () => {
                 );
               })
             ) : (
-              <p className="flex text-[#000000b4] justify-center items-center">
+              <p className="flex text-[#000000b4] text-xl justify-center items-center">
                 La cesta esta vacio
               </p>
             )}
@@ -148,7 +148,7 @@ const BasketSection = () => {
                   realizados antes de las 13:00).
                 </p>
               </label>
-              <div className="text-lg font-semibold leading-6">9,00 €</div>
+              <div className="text-lg font-semibold leading-6">9.00 €</div>
             </div>
           </form>
         </div>

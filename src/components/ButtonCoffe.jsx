@@ -5,7 +5,7 @@ const ButtonCoffe = ({ text, style,link,action }) => {
 
   
 
-const linkPath = link || ''
+const linkPath = link || '#'
  
     switch (style) {
       case "black":

@@ -30,7 +30,7 @@ const SuccessSection = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 items-center">
+    <div className="flex flex-col gap-6 items-center min-h-screen">
       <CardServices
         payFiniskSecction={true}
         title={"El pedido ha sido realizado con éxito"}

@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ButtonCoffe from "./ButtonCoffe";
 import LogoType from "./LogoType";
 import PageList from "./PageList";
 import { Phone } from "lucide-react";
 import { CoffeContext } from "@/context/CoffeContext";
 import CarShoping from "./CarShoping";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const { isCarAvailable, setIsCarAvailable, coffeChoiced, totalProductsChoiced } =
@@ -17,16 +18,20 @@ const NavBar = () => {
     return isCarAvailable ? setIsCarAvailable(false) : setIsCarAvailable(true);
   };
 
- 
+  const pathname=usePathname()
+  useEffect(() => {
+   setIsCarAvailable(false)
+ }, [pathname]);
 
+ const isSuccessPage = pathname === "/success"; // Verifica si estás en la página de éxito
   return (
     <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b]">
-      <Link href={"/"}>
+      <Link href={isSuccessPage ? "#" : "/"}>
         {" "}
-        <LogoType />
+        <LogoType isSuccessPage={isSuccessPage}/>
       </Link>
 
-      <PageList direction={"row"} />
+      <PageList direction={"row"} isSuccessPage={isSuccessPage} />
       <div className="flex justify-between items-center min-w-[288px] min-h-[40px] gap-6">
         <div className="flex min-w-[134px] min-h-[24px] gap-2 justify-between items-center">
           <Phone color="#ffffff" />
@@ -36,9 +41,9 @@ const NavBar = () => {
           </p>
         </div>
 
-        <Link href="">
+        
           <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
-        </Link>
+       
       </div>
       <div
         className="flex gap-2  cursor-pointer "
