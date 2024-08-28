@@ -57,7 +57,7 @@ const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center text-center gap-6 w-[282px] min-h-[391.39px] border rounded-lg border-solid border-[#e3ded7]  ">
+        <div className="flex flex-col items-center justify-center  text-center gap-6 w-[282px] min-h-[391.39px] border rounded-lg border-solid border-[#e3ded7]  ">
           <Image
             src={img}
             width={219.39}
@@ -65,7 +65,7 @@ const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
             alt="coffe img"
             className="opacity-40 -z-10"
           />
-          <div className="flex flex-col gap-3 text-sm font-semibold leading-4 opacity-40 -z-10">
+          <div className="flex flex-col gap-3 text-sm font-semibold leading-4 opacity-40 ">
             <p>{brand}</p>
             <p className="font-normal">{price.toFixed(2)} €</p>
           </div>

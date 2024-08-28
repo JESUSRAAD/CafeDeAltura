@@ -255,7 +255,7 @@ const PayMethod = () => {
                   <input
                     id="holder"
                     placeholder="Nombre del titular"
-                    className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                    className=" flex border border-gray-300 w-[279px] h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
                     type="text"
                     {...register("holder", {
                       required: {
@@ -281,7 +281,7 @@ const PayMethod = () => {
                   <input
                     id="numberCard"
                     placeholder="1234 1234 1234 1234"
-                    className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                    className=" flex border border-gray-300  h-[36px] w-[279px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
                     type="text"
                     {...register("numberCard", {
                       required: {

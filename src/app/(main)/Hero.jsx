@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <div className=" flex justify-center items-center min-h-[486px] shadow-[0px_4px_4px_0px_#00000040] mt-16 bg-[#e3ded74d]">
       <div className="flex items-center max-w-[1200px] min-h-[390px] gap-6">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col max-w-[588px] gap-4">
           <h3 className="text-lg font-semibold leading-6 text-[#2a5b45]">
             De la planta a tu taza
           </h3>
