@@ -11,31 +11,35 @@ import CarShoping from "./CarShoping";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {
-  const {
-    isCarAvailable,
-    setIsCarAvailable,
-    coffeChoiced,
-    totalProductsChoiced,
-  } = useContext(CoffeContext);
+  const { isCarAvailable, setIsCarAvailable, coffeChoiced, totalProductsChoiced, setValuesBox,setCoffeChoiced } =
+    useContext(CoffeContext);
 
   const handleCarShoping = () => {
     return isCarAvailable ? setIsCarAvailable(false) : setIsCarAvailable(true);
   };
 
-  const pathname = usePathname();
+  const pathname=usePathname()
   useEffect(() => {
-    setIsCarAvailable(false);
-  }, [pathname]);
+   setIsCarAvailable(false)
+ }, [pathname]);
 
-  const isSuccessPage = pathname === "/success"; // Verifica si estás en la página de éxito
+ const handleLinkClick = () => {
+  if (pathname === "/success") {
+    localStorage.removeItem("productsChoice");
+    localStorage.removeItem("saveValues");
+    setCoffeChoiced([])
+    setValuesBox({})
+  }
+};
+
   return (
-    <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b] z-50">
-      <Link href={isSuccessPage ? "#" : "/"}>
+    <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b]">
+      <Link href={"/"} onClick={handleLinkClick}>
         {" "}
-        <LogoType isSuccessPage={isSuccessPage} />
+        <LogoType />
       </Link>
 
-      <PageList direction={"row"} isSuccessPage={isSuccessPage} />
+      <PageList direction={"row"} action={handleLinkClick} />
       <div className="flex justify-between items-center min-w-[288px] min-h-[40px] gap-6">
         <div className="flex min-w-[134px] min-h-[24px] gap-2 justify-between items-center">
           <Phone color="#ffffff" />
@@ -45,20 +49,16 @@ const NavBar = () => {
           </p>
         </div>
 
-        <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
+        
+          <ButtonCoffe text={"Iniciar sesión"} style={"gray"} />
+        
       </div>
       <div
         className="flex gap-2  cursor-pointer "
         onClick={() => handleCarShoping()}
       >
         <Image src="/img/Carr.png" width={24} height={24} alt="icon-shopBag" />
-        <span
-          className={
-            coffeChoiced.length < 1
-              ? "  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute invisible mt-[16.1px]"
-              : "  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute  mt-[16.1px]"
-          }
-        ></span>
+        <span className={ coffeChoiced.length < 1?"  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute invisible mt-[16.1px]":"  w-[7.9px] h-[7.9px] rounded-full bg-[#DD2654] absolute  mt-[16.1px]"}></span>
         <span
           className={
             coffeChoiced.length < 1

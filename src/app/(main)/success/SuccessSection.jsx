@@ -22,8 +22,8 @@ const SuccessSection = () => {
     event.preventDefault();
 
      setCoffeChoiced([]);
-    localStorage.clear("productsChoice")
-    router.push('/shop'); // Redirige a la página /success
+     localStorage.removeItem("productsChoice");
+     router.push('/shop'); // Redirige a la página /success
 
   };
 
