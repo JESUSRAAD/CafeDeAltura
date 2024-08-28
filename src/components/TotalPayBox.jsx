@@ -8,27 +8,19 @@ const TotalPayBox = ({
   send,
   total,
   IVA,
+  checkAction,
   checkOut,
   pay,
   payFiniskSecction,
   btnBloked
 }) => {
   const { coffeChoiced } = useContext(CoffeContext);
-const saveValues=()=>{
-    const values={
-        subTotal:subTotal,
-  send:send,
-  total:total,
-  IVA:IVA
-    }
-  return  localStorage.setItem("saveValues", JSON.stringify(values));
 
-}
   
   return (
     <>
       {payFiniskSecction ? (
-        <div className="flex flex-col justify-between max-w-[1200px] h-fit gap-4 p-6 rounded-[10px] bg-[#f7f5f3]">
+        <div className="flex flex-col justify-between min-w-[1200px] h-fit gap-4 p-6 rounded-[10px] bg-[#f7f5f3]">
           <div className="flex flex-col gap-4">
             <div className=" text-start text-lg font-semibold leading-6">
             Tu pedido
@@ -166,7 +158,7 @@ const saveValues=()=>{
                   style={"green"}
                   text={"Ir a checkout"}
                   link={"/checkOut"}
-                  action={saveValues}
+                  action={checkAction}
                 />
               )}
 

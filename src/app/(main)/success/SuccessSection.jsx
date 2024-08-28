@@ -12,10 +12,8 @@ const SuccessSection = () => {
   const {
     valuesBox,
     setIsCarAvailable,
-    send,
-    total,
     setCoffeChoiced,
-    IVA,
+    
   } = useContext(CoffeContext);
   setIsCarAvailable(false);
   const router = useRouter(); // Obtén la instancia del enrutador
@@ -29,6 +27,8 @@ const SuccessSection = () => {
 
   };
 
+  console.log(valuesBox);
+  
   return (
     <div className="flex flex-col gap-6 items-center min-h-screen">
       <CardServices
