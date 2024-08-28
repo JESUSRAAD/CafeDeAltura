@@ -132,12 +132,13 @@ const TotalPayBox = ({
           {checkOut ? (
             <div className=" flex w-[310px] h-10 gap-4">
               {btnBloked ? (
-                <div className="opacity-30">
+                
                   <ButtonCoffe
-                    style={"green"}
+                    style={"greenBlock"}
                     text={"Pagar y realizar pedido"}
+                   
                   />
-                </div>
+              
               ) : (
                 <ButtonCoffe
                   style={"green"}

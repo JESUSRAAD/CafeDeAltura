@@ -29,7 +29,7 @@ const NavBar = () => {
 
   const isSuccessPage = pathname === "/success"; // Verifica si estás en la página de éxito
   return (
-    <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b]">
+    <nav className="flex text-white min-h-[64px] fixed items-center justify-around w-screen top-[0%] bg-[#2b2a2b] z-50">
       <Link href={isSuccessPage ? "#" : "/"}>
         {" "}
         <LogoType isSuccessPage={isSuccessPage} />
