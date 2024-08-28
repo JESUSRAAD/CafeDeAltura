@@ -9,9 +9,9 @@ const LinkArrow = ({ titleArrow, color, path }) => {
   switch (color) {
     case "black":
       return (
-        <div className=" underline  items-center">
+        <div className=" underline  ">
           <Link
-            className="flex text-black font-semibold text-sm leading-4 gap-4"
+            className="flex text-black items-center font-semibold text-sm leading-4 gap-4"
             href={linkPath}
           >
             {titleArrow}
@@ -22,9 +22,9 @@ const LinkArrow = ({ titleArrow, color, path }) => {
       );
     case "white":
       return (
-        <div className=" underline  items-center">
+        <div className=" underline  ">
           <Link
-            className="flex text-white font-semibold text-sm leading-4 gap-4"
+            className="flex text-white items-center font-semibold text-sm leading-4 gap-4"
             href={linkPath}
           >
             {titleArrow}
@@ -35,9 +35,9 @@ const LinkArrow = ({ titleArrow, color, path }) => {
       );
     default:
       return (
-        <div className=" underline  items-center">
+        <div className=" underline  ">
           <Link
-            className="flex text-purple-950 font-semibold text-sm leading-4 gap-4"
+            className="flex text-purple-950 items-center font-semibold text-sm leading-4 gap-4"
             href={linkPath}
           >
             {titleArrow}

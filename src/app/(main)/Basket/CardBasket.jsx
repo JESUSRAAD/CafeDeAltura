@@ -23,7 +23,8 @@ const CardBasket = ({
             </p>
           </div>
 
-          <div class="text-lg min-w-[55px] font-semibold leading-6">
+          <div class="text-lg min-w-[65px] font-semibold text-right leading-6 pb-7">
+            {" "}
             {price.toFixed(2)} €
           </div>
         </div>
@@ -47,7 +48,7 @@ const CardBasket = ({
               Paquete de café, 250 gr
             </p>
           </div>
-          <div class="text-lg min-w-[55px] font-semibold leading-6">
+          <div class="  text-lg min-w-[65px]  font-semibold text-right leading-6 pb-7">
             {price.toFixed(2)} €
           </div>
         </div>
