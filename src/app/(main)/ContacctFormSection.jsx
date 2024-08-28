@@ -31,7 +31,7 @@ const ContacctFormSection = () => {
     <div className="flex min-h-[552px]  justify-center bg-[#e3ded7]">
       <div className="flex w-[1200px] min-h-[552px] gap-6 items-center">
         <div className=" flex flex-col items-center w-[588px] min-h-[320px] gap-8  text-gray-500 text-sm font-normal leading-4">
-          <div className="   min-h-[68px] gap-3 ">
+          <div id="contactSection" className="   min-h-[68px] gap-3 ">
             <h3 className="text-lg font-semibold leading-6 text-gray-900">
               Entra en contacto con nosotros
             </h3>
