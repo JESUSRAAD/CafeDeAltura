@@ -20,17 +20,17 @@ const Hero = () => {
             hogar.
           </p>
           <div className="flex gap-4 w-[321px]">
-            <Link href="">
+           
               <ButtonCoffe text={"Descubrir orígenes"} style={"black"} />
-            </Link>
+           
 
-            <Link href="">
+            
               <ButtonCoffe
                 text={"Comprar café"}
                 style={"green"}
                 link={"/shop"}
               />
-            </Link>
+           
           </div>
         </div>
         {/* <img

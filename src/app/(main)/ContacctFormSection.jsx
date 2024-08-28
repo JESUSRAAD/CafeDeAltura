@@ -125,7 +125,7 @@ const ContacctFormSection = () => {
             </div>
             <div className=" flex flex-col gap-1 min-h-[58px]">
               <label htmlFor="numPhone">Teléfono</label>
-              <div className="flex gap-[0%] border border-gray-300 shadow-[0px_1px_2px_0px_#0000000d] rounded-md border-solid hover:border  hover:border-solid hover:border-[#9b9ea3] focus:border-2 focus:border-solid focus:border-[#3f8f6b] focus-within:hover:shadow-none focus-within:hover:border-[#3F8F6B] focus-within:hover:border-2">
+              <div className="flex gap-0 border border-gray-300 shadow-sm rounded-md border-solid hover:border-gray-400 focus-within:!border-2 focus-within:!border-[#3f8f6b] focus:outline-none">                {" "}
                 <select
                   {...register("countriCode")}
                   className=" text-center w-[68px] h-[38px] rounded-md border-0 "

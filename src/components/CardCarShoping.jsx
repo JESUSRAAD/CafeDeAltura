@@ -1,4 +1,4 @@
-import { Minus, Plus, Trash } from "lucide-react";
+import { CircleMinus, CirclePlus, Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -31,12 +31,12 @@ const CardCarShoping = ({
             {acc}
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center gap-2 items-center">
           {/* <button class="flex justify-center  items-center"> */}
-          <Plus size={13} color="#000000" onClick={plusAction} />
+          <CirclePlus size={13} color="#2a5b45" onClick={plusAction} />
           {/* </button> */}
           {/* <button class="flex justify-center items-center text-black w-6 h-6"> */}
-          <Minus size={13} color="#000000" onClick={minusAction} />
+          <CircleMinus size={13} color="#2a5b45" onClick={minusAction} />
           {/* </button> */}
         </div>
       </div>
