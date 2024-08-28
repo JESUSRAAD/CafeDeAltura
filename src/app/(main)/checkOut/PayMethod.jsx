@@ -12,16 +12,11 @@ const PayMethod = () => {
   const {
     setIsCarAvailable,
     valuesBox,
-    setSubtotal,
-    send,
-    setSend,
-    total,
-    setTotal,
-    IVA,
-    setIVA,
     payForm,
     setPayForm,
   } = useContext(CoffeContext);
+
+
   const {
     register,
     handleSubmit,
@@ -84,7 +79,7 @@ const PayMethod = () => {
     }
   }, [watch(), errors]);
 
-  const [openItem, setOpenItem] = useState("item-1"); // Estado para controlar el ítem abierto
+
   const router = useRouter(); // Obtén la instancia del enrutador
 
   const onSubmit = handleSubmit((data) => {
@@ -96,7 +91,6 @@ const PayMethod = () => {
     });
     console.log(payForm);
     alert("Datos enviados");
-    setOpenItem("item-1");
     router.push("/success"); // Redirige a la página /success
   });
 
@@ -212,6 +206,9 @@ const PayMethod = () => {
         break;
     }
   }, [watch("countri")]);
+ 
+
+
 
   const handlePostalCodeInput = (e) => {
     let input = e.target.value.replace(/\D/g, ""); // Elimina cualquier carácter no numérico
@@ -222,7 +219,7 @@ const PayMethod = () => {
   };
   const payMethod = watch("payMethod");
   
-console.log(payMethod);
+console.log(valuesBox);
 
   return (
     <section className="flex flex-col  items-center min-h-screen gap-6 mt-16 p-10">

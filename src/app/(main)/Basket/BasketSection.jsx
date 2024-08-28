@@ -9,10 +9,9 @@ import TotalPayBox from "@/components/TotalPayBox";
 
 const BasketSection = () => {
   const {
-    coffeData,
-    setCoffeData,
+    valuesBox,
+    setValuesBox,
     coffeChoiced,
-    setCoffeChoiced,
     setIsCarAvailable,
     subTotal,
     setSubtotal,
@@ -28,9 +27,6 @@ const BasketSection = () => {
   } = useContext(CoffeContext);
 
   setIsCarAvailable(false);
-
- 
-
 
   const { register, watch } = useForm({
     defaultValues: {
@@ -70,6 +66,19 @@ const BasketSection = () => {
 
   setIVA(IVATotalFun().toFixed(2) + " €");
   setSend(watch("send"));
+console.log(valuesBox);
+
+
+const saveValues=()=>{
+ setValuesBox({
+      subTotal:subTotal,
+send:send,
+total:total,
+IVA:IVA
+  })
+
+
+}
 
   return (
     <section className="flex flex-col items-center min-h-screen gap-6 mt-16 p-10">
@@ -101,7 +110,7 @@ const BasketSection = () => {
             )}
           </div>
           <form className="flex flex-col gap-6">
-            <h3 className="font-semibold text-lg leading-6" >
+            <h3 className="font-semibold text-lg leading-6">
               Seleccionar envío
             </h3>
             <div className="flex justify-center items-center gap-4">
@@ -153,7 +162,7 @@ const BasketSection = () => {
           </form>
         </div>
 
-        <TotalPayBox IVA={IVA} send={send} subTotal={subTotal} total={total} />
+        <TotalPayBox IVA={IVA} send={send} subTotal={subTotal} total={total}  checkAction={saveValues}/>
       </div>
     </section>
   );

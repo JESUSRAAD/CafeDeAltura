@@ -40,26 +40,26 @@ export default function CoffeContextProvider({ children }) {
   };
 
   // Función para disminuir la cantidad del producto
-  const handleMinusAction = (id) => {
-    setCoffeChoiced((prev) => {
-      // Disminuir la cantidad del producto seleccionado
-      const updatedProducts = prev
-        .map((item) =>
-          item.id === id ? updateProduct({ ...item, acc: item.acc - 1 }) : item
-        )
-        .filter((item) => item.acc > 0); // Filtrar productos con cantidad mayor a 0
-  
-      // Si no quedan productos, limpiar el localStorage
-      if (updatedProducts.length === 0) {
-        localStorage.removeItem("productsChoice");
-      } else {
-        // Si hay productos, actualizar el localStorage
-        localStorage.setItem("productsChoice", JSON.stringify(updatedProducts));
-      }
-  
-      return updatedProducts;
-    });
-  };
+const handleMinusAction = (id) => {
+  setCoffeChoiced((prev) => {
+    // Disminuir la cantidad del producto seleccionado
+    const updatedProducts = prev
+      .map((item) =>
+        item.id === id ? updateProduct({ ...item, acc: item.acc - 1 }) : item
+      )
+      .filter((item) => item.acc > 0); // Filtrar productos con cantidad mayor a 0
+
+    // Si no quedan productos, limpiar el localStorage
+    if (updatedProducts.length === 0) {
+      localStorage.removeItem("productsChoice");
+    } else {
+      // Si hay productos, actualizar el localStorage
+      localStorage.setItem("productsChoice", JSON.stringify(updatedProducts));
+    }
+
+    return updatedProducts;
+  });
+};
 
   // Función para eliminar el producto del carrito
   const handleTrashAction = (id) => {
@@ -87,7 +87,7 @@ setValuesBox(saveValues)
 
     const payDirection = JSON.parse(localStorage.getItem("payDirection")) || [];
     setPayForm(payDirection);
-  }, [setCoffeUsers, setCoffeChoiced, setPayForm]);
+  }, [setCoffeUsers, setCoffeChoiced, setPayForm,setValuesBox]);
 
   useEffect(() => {
     if (coffeChoiced.length > 0) {
@@ -95,6 +95,12 @@ setValuesBox(saveValues)
       localStorage.setItem("productsChoice", JSON.stringify(coffeChoiced));
     }
   }, [coffeChoiced]);
+  useEffect(() => {
+    if (coffeChoiced.length > 0) {
+      // Evitar guardar un array vacío
+      localStorage.setItem("saveValues", JSON.stringify(valuesBox));
+    }
+  }, [valuesBox]);
 
   return (
     <CoffeContext.Provider
