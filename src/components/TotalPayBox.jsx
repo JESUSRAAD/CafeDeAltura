@@ -36,6 +36,7 @@ const TotalPayBox = ({
                 />
               );
             })}
+            <hr className="   border-solid border-[#e3ded7]" />
 
             <div className=" flex justify-between">
               <div className="text-sm font-normal leading-4">SUBTOTAL</div>

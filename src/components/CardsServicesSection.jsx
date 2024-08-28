@@ -14,25 +14,24 @@ const CardsServicesSection = () => {
           content={
             "Tienes cosas más importantes en la cabeza, por eso con nuestra suscripción de café, nunca te quedarás sin tu taza de la mañana."
           }
-          icon={<ClipboardCheck size={40} color="#ffffff" />}
+          icon={<ClipboardCheck size={40} strokeWidth={1.50} color="#ffffff" />}
         />
         <CardServices
           title={"Envío en 24/48h"}
           content={
             "Pide tu café antes de las 12h y lo recibirás al día siguiente."
           }
-          icon={<Truck size={40} color="#ffffff" />}
+          icon={<Truck size={40} strokeWidth={1.50} color="#ffffff" />}
         />
         <CardServices
           title={"Descuentos y beneficios"}
           content={
             "Cada dos meses, te regalamos una bolsa de un nuevo origen sorpresa, para que lo descubras junto a nosotros."
           }
-          icon={<Gift size={40} color="#ffffff" />}
+          icon={<Gift size={40} strokeWidth={1.50}  color="#ffffff" />}
         />
       </div>
     </div>
   );
 };
-
 export default CardsServicesSection;
