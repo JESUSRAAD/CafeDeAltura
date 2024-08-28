@@ -7,12 +7,8 @@ import { CoffeContext } from "@/context/CoffeContext";
 const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
   const { coffeChoiced, setCoffeChoiced } = useContext(CoffeContext);
 
-  
-  
-
   const addToCarShop = (event) => {
     event.preventDefault();
-    
 
     setCoffeChoiced((prev) => {
       const existingItemIndex = prev.findIndex((item) => item.id === _id);
@@ -23,7 +19,7 @@ const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
         const updatedItem = { ...updatedCoffeChoiced[existingItemIndex] };
         updatedItem.acc += 1;
         updatedItem.totalPay = updatedItem.acc * updatedItem.price;
-        updatedItem.IVAPay = updatedItem.acc * updatedItem.price*0.21;
+        updatedItem.IVAPay = updatedItem.acc * updatedItem.price * 0.21;
         updatedCoffeChoiced[existingItemIndex] = updatedItem;
         return updatedCoffeChoiced;
       } else {
@@ -35,19 +31,14 @@ const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
           price: price,
           acc: 1,
           totalPay: price,
-          IVAPay:price*0.21
+          IVAPay: price * 0.21,
         };
         return [...prev, newItem];
       }
     });
-  	
-
-   
-
   };
 
   console.log(coffeChoiced);
-
 
   return (
     <>

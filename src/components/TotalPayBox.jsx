@@ -12,31 +12,30 @@ const TotalPayBox = ({
   checkOut,
   pay,
   payFiniskSecction,
-  btnBloked
+  btnBloked,
 }) => {
   const { coffeChoiced } = useContext(CoffeContext);
 
-  
   return (
     <>
       {payFiniskSecction ? (
         <div className="flex flex-col justify-between min-w-[1200px] h-fit gap-4 p-6 rounded-[10px] bg-[#f7f5f3]">
           <div className="flex flex-col gap-4">
             <div className=" text-start text-lg font-semibold leading-6">
-            Tu pedido
+              Tu pedido
             </div>
-           { coffeChoiced.map((coffe) => {
-                return (
-                  <CardBasket
-                    brand={coffe.name}
-                    img={coffe.img}
-                    price={coffe.price}
-                    key={coffe.id}
-                    acc={coffe.acc}
-                   payFiniskSecction={true}
-                  />
-                );
-              })}
+            {coffeChoiced.map((coffe) => {
+              return (
+                <CardBasket
+                  brand={coffe.name}
+                  img={coffe.img}
+                  price={coffe.price}
+                  key={coffe.id}
+                  acc={coffe.acc}
+                  payFiniskSecction={true}
+                />
+              );
+            })}
 
             <div className=" flex justify-between">
               <div className="text-sm font-normal leading-4">SUBTOTAL</div>
@@ -76,7 +75,6 @@ const TotalPayBox = ({
               </div>
             </div>
           </div>
-         
         </div>
       ) : (
         <div
@@ -132,22 +130,20 @@ const TotalPayBox = ({
           </div>
           {checkOut ? (
             <div className=" flex w-[310px] h-10 gap-4">
-             {btnBloked?
-             <div className="opacity-30">
-              <ButtonCoffe
-                style={"green"}
-                text={"Pagar y realizar pedido"}
-             
-              />
-              </div>
-              :
-              <ButtonCoffe
-                style={"green"}
-                text={"Pagar y realizar pedido"}
-                action={pay}
-                
-              />
-            }
+              {btnBloked ? (
+                <div className="opacity-30">
+                  <ButtonCoffe
+                    style={"green"}
+                    text={"Pagar y realizar pedido"}
+                  />
+                </div>
+              ) : (
+                <ButtonCoffe
+                  style={"green"}
+                  text={"Pagar y realizar pedido"}
+                  action={pay}
+                />
+              )}
             </div>
           ) : (
             <div className=" flex w-[310px] h-10 gap-4">

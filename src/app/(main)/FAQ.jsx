@@ -1,20 +1,16 @@
-import React from 'react'
+import React from "react";
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-  } from "@/components/ui/accordion"
-import LinkArrow from '@/components/LinkArrow'
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import LinkArrow from "@/components/LinkArrow";
 
 const FAQ = () => {
-      
-
-
-
   return (
-    <div className=' flex flex-col items-center justify-between text-white min-h-[444px] gap-6 bg-[#2a5b45]'>
-   <h1 className="   text-2xl font-medium leading-7 text-white flex m-0 items-end h-[110px] pb-6">
+    <div className=" flex flex-col items-center justify-between text-white min-h-[444px] gap-6 bg-[#2a5b45]">
+      <h1 className="   text-2xl font-medium leading-7 text-white flex m-0 items-end h-[110px] pb-6">
         Preguntas Frecuentes
       </h1>
 
@@ -77,12 +73,11 @@ const FAQ = () => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <div className=' flex m-0 items-start h-[72px] '>
-      <LinkArrow titleArrow={"Resolvemos tus dudas"} color={"white"}/>
-
+      <div className=" flex m-0 items-start h-[72px] ">
+        <LinkArrow titleArrow={"Resolvemos tus dudas"} color={"white"} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FAQ
+export default FAQ;

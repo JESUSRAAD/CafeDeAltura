@@ -5,8 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import HomeCardCoffe from "./HomeCardCoffe";
 import LinkArrow from "./LinkArrow";
 
-
-const HomeCards = ({acc,title,margin, link,titleArrow}) => {
+const HomeCards = ({ acc, title, margin, link, titleArrow }) => {
   const [loading, setLoading] = useState(true);
   const { coffeData, setCoffeData } = useContext(CoffeContext);
 
@@ -31,19 +30,24 @@ const HomeCards = ({acc,title,margin, link,titleArrow}) => {
 
   console.log(coffeData);
 
-
-const withMargin="flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 mt-16 pt-[40px] pb-[40px]"
-const withOutMargin="flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 "
+  const withMargin =
+    "flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 mt-16 pt-[40px] pb-[40px]";
+  const withOutMargin =
+    "flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 ";
 
   return (
     <div className="flex flex-col items-center justify-center">
       {loading ? (
-        <p className="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16">Cargando...</p>
+        <p className="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16">
+          Cargando...
+        </p>
       ) : (
-        <div className={margin?withMargin:withOutMargin}>
-          <h2 className="text-[#2a5b45] text-2xl leading-7 font-medium ">{title}</h2>
+        <div className={margin ? withMargin : withOutMargin}>
+          <h2 className="text-[#2a5b45] text-2xl leading-7 font-medium ">
+            {title}
+          </h2>
           <div className="flex flex-wrap justify-center min-h-[391.39px] gap-6">
-            {coffeData.slice(0, acc).map((coffe,i) => {
+            {coffeData.slice(0, acc).map((coffe, i) => {
               return (
                 <HomeCardCoffe
                   key={i}
@@ -56,7 +60,9 @@ const withOutMargin="flex flex-col items-center justify-center max-w-[1200px] mi
               );
             })}
           </div>
-         {link?<LinkArrow titleArrow={titleArrow} color={"black"} path={"/shop"}/>:null}
+          {link ? (
+            <LinkArrow titleArrow={titleArrow} color={"black"} path={"/shop"} />
+          ) : null}
         </div>
       )}
     </div>

@@ -1,41 +1,52 @@
-import { MoveRight } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { MoveRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-const LinkArrow = ({titleArrow, color, path}) => {
-  
-  const linkPath = path || ""; 
+const LinkArrow = ({ titleArrow, color, path }) => {
+  const linkPath = path || "";
 
   switch (color) {
     case "black":
-      return  <div className=" underline  items-center">
-      <Link className="flex text-black font-semibold text-sm leading-4 gap-4" href={linkPath}>
-        {titleArrow}
+      return (
+        <div className=" underline  items-center">
+          <Link
+            className="flex text-black font-semibold text-sm leading-4 gap-4"
+            href={linkPath}
+          >
+            {titleArrow}
 
-      <MoveRight color="#000000" />
-      </Link>
-    </div>;
+            <MoveRight color="#000000" />
+          </Link>
+        </div>
+      );
     case "white":
-      return <div className=" underline  items-center">
-      <Link className="flex text-white font-semibold text-sm leading-4 gap-4" href={linkPath}>
-        {titleArrow}
+      return (
+        <div className=" underline  items-center">
+          <Link
+            className="flex text-white font-semibold text-sm leading-4 gap-4"
+            href={linkPath}
+          >
+            {titleArrow}
 
-      <MoveRight color="#ffffff" />
-      </Link>
-    </div>; 
+            <MoveRight color="#ffffff" />
+          </Link>
+        </div>
+      );
     default:
-      return<div className=" underline  items-center">
-      <Link className="flex text-purple-950 font-semibold text-sm leading-4 gap-4" href={linkPath}>
-        {titleArrow}
+      return (
+        <div className=" underline  items-center">
+          <Link
+            className="flex text-purple-950 font-semibold text-sm leading-4 gap-4"
+            href={linkPath}
+          >
+            {titleArrow}
 
-      <MoveRight color="#3b0764" />
-      </Link>
-    </div>; 
+            <MoveRight color="#3b0764" />
+          </Link>
+        </div>
+      );
   }
+};
 
-
-  
-}
-
-export default LinkArrow
+export default LinkArrow;

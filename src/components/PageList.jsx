@@ -1,28 +1,53 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
-const PageList = ({direction,isSuccessPage}) => {
-    switch (direction) {
-        case "row":
-          return   <ul className='flex justify-between items-center gap-4 min-w-[512px] min-h-[32px] text-sm font-semibold leading-4 p-2'>
-          <il className='flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]' ><Link href={isSuccessPage ? "#" : "/shop"}>Tienda</Link></il>
-          <il className='flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]' ><Link href={isSuccessPage ? "#" : "/suscription"}>Suscripción</Link></il>
-          <il className='flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]' ><Link href={isSuccessPage ? "#" : "/forCompany"}>Para empresas</Link></il>
-          <il className='flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]' ><Link href={isSuccessPage ? "#" : "/aboutWe"}>Sobre nosotros</Link></il>
-          <il className='flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]' ><Link href={isSuccessPage ? "#" : "/contact"}>Contacto</Link></il>
-        
-      </ul>
-        default:
-          return   <ul className='flex flex-col  items-start gap-4  min-h-[32px] text-sm font-semibold leading-4 '>
-          <il className='flex items-center h-8' ><Link href={isSuccessPage ? "#" : "/shop"}>Tienda</Link></il>
-          <il className='flex items-center h-8 ' ><Link href={isSuccessPage ? "#" : "/suscription"}>Suscripción</Link></il>
-          <il className='flex items-center h-8 ' ><Link href={isSuccessPage ? "#" : "/forCompany"}>Para empresas</Link></il>
-          <il className='flex items-center h-8 ' ><Link href={isSuccessPage ? "#" : "/aboutWe"}>Sobre nosotros</Link></il>
-          <il className='flex items-center h-8 ' ><Link href={isSuccessPage ? "#" : "/contact"}>Contacto</Link></il>
-        
-      </ul>
-      }
-    
-}
+const PageList = ({ direction, isSuccessPage }) => {
+  switch (direction) {
+    case "row":
+      return (
+        <ul className="flex justify-between items-center gap-4 min-w-[512px] min-h-[32px] text-sm font-semibold leading-4 p-2">
+          <il className="flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]">
+            <Link href={isSuccessPage ? "#" : "/shop"}>Tienda</Link>
+          </il>
+          <il className="flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]">
+            <Link href={isSuccessPage ? "#" : "/suscription"}>Suscripción</Link>
+          </il>
+          <il className="flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]">
+            <Link href={isSuccessPage ? "#" : "/forCompany"}>
+              Para empresas
+            </Link>
+          </il>
+          <il className="flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]">
+            <Link href={isSuccessPage ? "#" : "/aboutWe"}>Sobre nosotros</Link>
+          </il>
+          <il className="flex items-center h-8 p-2 hover:flex hover:items-center hover:h-8 hover:p-2 hover:rounded-[10px] hover:bg-[#f7f5f31a]">
+            <Link href={isSuccessPage ? "#" : "/contact"}>Contacto</Link>
+          </il>
+        </ul>
+      );
+    default:
+      return (
+        <ul className="flex flex-col  items-start gap-4  min-h-[32px] text-sm font-semibold leading-4 ">
+          <il className="flex items-center h-8">
+            <Link href={isSuccessPage ? "#" : "/shop"}>Tienda</Link>
+          </il>
+          <il className="flex items-center h-8 ">
+            <Link href={isSuccessPage ? "#" : "/suscription"}>Suscripción</Link>
+          </il>
+          <il className="flex items-center h-8 ">
+            <Link href={isSuccessPage ? "#" : "/forCompany"}>
+              Para empresas
+            </Link>
+          </il>
+          <il className="flex items-center h-8 ">
+            <Link href={isSuccessPage ? "#" : "/aboutWe"}>Sobre nosotros</Link>
+          </il>
+          <il className="flex items-center h-8 ">
+            <Link href={isSuccessPage ? "#" : "/contact"}>Contacto</Link>
+          </il>
+        </ul>
+      );
+  }
+};
 
-export default PageList
+export default PageList;

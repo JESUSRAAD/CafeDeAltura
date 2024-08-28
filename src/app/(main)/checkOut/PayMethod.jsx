@@ -8,14 +8,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PayMethod = () => {
-    
-  const {
-    setIsCarAvailable,
-    valuesBox,
-    payForm,
-    setPayForm,
-  } = useContext(CoffeContext);
-
+  const { setIsCarAvailable, valuesBox, payForm, setPayForm } =
+    useContext(CoffeContext);
 
   const {
     register,
@@ -23,8 +17,7 @@ const PayMethod = () => {
     reset,
     formState: { errors },
     watch,
-    
-  } = useForm({mode:"onChange",defaultValues:{payMethod:"tarjeta"}});
+  } = useForm({ mode: "onChange", defaultValues: { payMethod: "tarjeta" } });
 
   setIsCarAvailable(false);
   const [isBloked, setIsBloked] = useState(true);
@@ -78,7 +71,6 @@ const PayMethod = () => {
       setIsBloked(true);
     }
   }, [watch(), errors]);
-
 
   const router = useRouter(); // Obtén la instancia del enrutador
 
@@ -206,9 +198,6 @@ const PayMethod = () => {
         break;
     }
   }, [watch("countri")]);
- 
-
-
 
   const handlePostalCodeInput = (e) => {
     let input = e.target.value.replace(/\D/g, ""); // Elimina cualquier carácter no numérico
@@ -218,8 +207,8 @@ const PayMethod = () => {
     e.target.value = input; // Establece el valor del campo al número limpio
   };
   const payMethod = watch("payMethod");
-  
-console.log(valuesBox);
+
+  console.log(valuesBox);
 
   return (
     <section className="flex flex-col  items-center min-h-screen gap-6 mt-16 p-10">
@@ -234,8 +223,7 @@ console.log(valuesBox);
           {/* ///////////////////////////////primer input///////////////////////////////////// */}
           <div className="w-[620px] min-h-6 flex no-underline hover:no-underline  items-center">
             <input
-            defaultChecked
-              
+              defaultChecked
               className="accent-[#2a5b45] "
               {...register("payMethod")}
               value="tarjeta"
@@ -349,16 +337,16 @@ console.log(valuesBox);
                     type="text"
                     maxLength={3}
                     {...register("CVC", {
-                      required:  {
+                      required: {
                         value: true,
                         message: "CVC requerido",
                       },
-                      minLength:  {
+                      minLength: {
                         value: 3,
                         message:
                           "El CVC de la tarjeta debe tener al menos 3 numeros",
                       },
-                      pattern:  {
+                      pattern: {
                         value: /^[0-9]{3}$/, // Valida que solo se ingresen 3 dígitos
                         message: "CVC inválido, deben ser 3 números",
                       },

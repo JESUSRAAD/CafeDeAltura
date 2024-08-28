@@ -16,8 +16,8 @@ const CarShoping = ({ arr, visibleCondition }) => {
   const handleCleanCarShoping = (event) => {
     event.preventDefault();
 
-     setCoffeChoiced([]);
-    localStorage.clear("productsChoice")
+    setCoffeChoiced([]);
+    localStorage.clear("productsChoice");
   };
 
   const arrCar = arr || [];
