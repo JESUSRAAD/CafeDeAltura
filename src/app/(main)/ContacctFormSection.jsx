@@ -63,7 +63,7 @@ const ContacctFormSection = () => {
               ¿Buscas un trabajo?{" "}
               <Link
                 className="text-sm font-semibold leading-4 text-gray-900 underline"
-                href=""
+                href="/jobOffert"
               >
                 Ver nuestras ofertas.
               </Link>
@@ -180,7 +180,7 @@ const ContacctFormSection = () => {
               <label htmlFor="conditions">
                 Acepto la{" "}
                 <Link
-                  href=""
+                  href="/privPolitic"
                   className="text-sm font-semibold leading-4 underline text-gray-700"
                 >
                   Política de Privacidad
@@ -188,7 +188,7 @@ const ContacctFormSection = () => {
                 y los
                 <Link
                   className="text-sm font-semibold leading-4 underline text-gray-700"
-                  href=""
+                  href="termsAndConditions"
                 >
                   {" "}
                   Términos y condiciones

@@ -1,18 +1,14 @@
 "use client";
 import TotalPayBox from "@/components/TotalPayBox";
 import { CoffeContext } from "@/context/CoffeContext";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@radix-ui/react-accordion";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PayMethod = () => {
+    
   const {
     setIsCarAvailable,
     valuesBox,
@@ -32,7 +28,8 @@ const PayMethod = () => {
     reset,
     formState: { errors },
     watch,
-  } = useForm();
+    
+  } = useForm({mode:"onChange",defaultValues:{payMethod:"tarjeta"}});
 
   setIsCarAvailable(false);
   const [isBloked, setIsBloked] = useState(true);
@@ -65,7 +62,7 @@ const PayMethod = () => {
       } else {
         // En caso de otros métodos de pago
         return (
-            values.payMethod&&
+          values.payMethod &&
           values.name &&
           values.surnames &&
           values.numPhone &&
@@ -223,13 +220,12 @@ const PayMethod = () => {
     }
     e.target.value = input; // Establece el valor del campo al número limpio
   };
-
   const payMethod = watch("payMethod");
-
-
+  
+console.log(payMethod);
 
   return (
-    <section className="flex flex-col  items-center min-h-[772px] gap-6 mt-16 p-10">
+    <section className="flex flex-col  items-center min-h-screen gap-6 mt-16 p-10">
       <h2 className="font-medium text-2xl leading-7 text-[#2a5b45]">
         Checkout
       </h2>
@@ -241,8 +237,8 @@ const PayMethod = () => {
           {/* ///////////////////////////////primer input///////////////////////////////////// */}
           <div className="w-[620px] min-h-6 flex no-underline hover:no-underline  items-center">
             <input
-            
-              defaultChecked
+            defaultChecked
+              
               className="accent-[#2a5b45] "
               {...register("payMethod")}
               value="tarjeta"
@@ -256,129 +252,130 @@ const PayMethod = () => {
               <p className="text-sm font-semibold leading-4">
                 Tarjeta de débito
               </p>
-             { payMethod === "tarjeta" ?<p className="text-sm font-normal leading-4">
-                Opción estándar sin seguimiento
-              </p>:null}
+              {payMethod === "tarjeta" && (
+                <p className="text-sm font-normal leading-4">
+                  Opción estándar sin seguimiento
+                </p>
+              )}
             </label>
           </div>
           {/* //////////////////////////////////////////////////////////////////// */}
-        { payMethod === "tarjeta" ? <div className="flex flex-col gap-2  w-[620px] h-auto font-normal text-xs leading-4  text-[#2b2a2b] ">
-            <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
-              <label htmlFor="holder" className="text-xs font-normal">
-                Titular
-              </label>
-              <div className="flex gap-2  items-center ">
-                <input
-                  id="holder"
-                  placeholder="Nombre del titular"
-                  className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
-                  type="text"
-                  {...register("holder", {
-                    required: payMethod === "tarjeta" && {
-                      value: true,
-                      message: "Nombre del titular requerido",
-                    },
-                    validate:
-                      payMethod === "tarjeta" && hasAtLeastTwoNonSpaceChars,
-                  })}
-                />
-                {errors.holder ? (
-                  <span className="text-xs text-[#FF5555] min-w-40">
-                    {errors.holder.message}
-                  </span>
-                ) : null}
-              </div>
-            </div>
-
-            <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
-              <label htmlFor="numberCard" className="text-xs font-normal">
-                Número de la tarjeta
-              </label>
-              <div className="flex gap-2  items-center ">
-                <input
-                  id="numberCard"
-                  placeholder="1234 1234 1234 1234"
-                  className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
-                  type="text"
-                  {...register("numberCard", {
-                    required: payMethod === "tarjeta" && {
-                      value: true,
-                      message: "Número de la tarjeta requerido",
-                    },
-
-                    pattern: payMethod === "tarjeta" && {
-                      value: /^\d{4} \d{4} \d{4} \d{4}$/,
-                      message: "Formato inválido, usa 1234 1234 1234 1234",
-                    },
-                  })}
-                  onInput={handleCardNumberInput} // Aplica el formateo al escribir
-                />
-                {errors.numberCard ? (
-                  <span className="text-xs text-[#FF5555] min-w-40">
-                    {errors.numberCard.message}
-                  </span>
-                ) : null}
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
-                <label htmlFor="expDate" className="text-xs font-normal">
-                  Fecha de caducidad
+          {payMethod === "tarjeta" && (
+            <div className="flex flex-col gap-2  w-[620px] h-auto font-normal text-xs leading-4  text-[#2b2a2b] ">
+              <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
+                <label htmlFor="holder" className="text-xs font-normal">
+                  Titular
                 </label>
-                <input
-                  type="text"
-                  placeholder="MM / YY"
-                  maxLength="7"
-                  className="flex border border-gray-300 h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border hover:border-solid hover:border-[#9b9ea3] focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b]"
-                  {...register("expDate", {
-                    required:
-                      payMethod === "tarjeta" &&
-                      "La fecha de caducidad es requerida",
-                    validate: payMethod === "tarjeta" && validateExpDate,
-                  })}
-                  onInput={handleExpDateInput} // Aquí agregas la función para manejar el input
-                />
-                {errors.expDate ? (
-                  <span className="text-xs text-[#FF5555] max-w-[112.25px]">
-                    {errors.expDate.message}
-                  </span>
-                ) : null}{" "}
+                <div className="flex gap-2  items-center ">
+                  <input
+                    id="holder"
+                    placeholder="Nombre del titular"
+                    className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                    type="text"
+                    {...register("holder", {
+                      required: {
+                        value: true,
+                        message: "Nombre del titular requerido",
+                      },
+                      validate: hasAtLeastTwoNonSpaceChars,
+                    })}
+                  />
+                  {errors.holder ? (
+                    <span className="text-xs text-[#FF5555] min-w-40">
+                      {errors.holder.message}
+                    </span>
+                  ) : null}
+                </div>
               </div>
 
-              <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
-                <label htmlFor="CVC" className="text-xs font-normal">
-                  CVC
+              <div className="flex flex-col w-[248.5px] min-h-[55px] gap-[3px]">
+                <label htmlFor="numberCard" className="text-xs font-normal">
+                  Número de la tarjeta
                 </label>
-                <input
-                  id="CVC"
-                  placeholder="123"
-                  className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
-                  type="text"
-                  maxLength={3}
-                  {...register("CVC", {
-                    required: payMethod === "tarjeta" && {
-                      value: true,
-                      message: "CVC requerido",
-                    },
-                    minLength: payMethod === "tarjeta" && {
-                      value: 3,
-                      message:
-                        "El CVC de la tarjeta debe tener al menos 3 numeros",
-                    },
-                    pattern: payMethod === "tarjeta" && {
-                      value: /^[0-9]{3}$/, // Valida que solo se ingresen 3 dígitos
-                      message: "CVC inválido, deben ser 3 números",
-                    },
-                  })}
-                />
-                {errors.CVC ? (
-                  <span className="text-xs text-[#FF5555] max-w-[112.25px]">
-                    {errors.CVC.message}
-                  </span>
-                ) : null}{" "}
+                <div className="flex gap-2  items-center ">
+                  <input
+                    id="numberCard"
+                    placeholder="1234 1234 1234 1234"
+                    className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                    type="text"
+                    {...register("numberCard", {
+                      required: {
+                        value: true,
+                        message: "Número de la tarjeta requerido",
+                      },
+
+                      pattern: {
+                        value: /^\d{4} \d{4} \d{4} \d{4}$/,
+                        message: "Formato inválido, usa 1234 1234 1234 1234",
+                      },
+                    })}
+                    onInput={handleCardNumberInput} // Aplica el formateo al escribir
+                  />
+                  {errors.numberCard ? (
+                    <span className="text-xs text-[#FF5555] min-w-40">
+                      {errors.numberCard.message}
+                    </span>
+                  ) : null}
+                </div>
+              </div>
+              <div className="flex gap-6">
+                <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
+                  <label htmlFor="expDate" className="text-xs font-normal">
+                    Fecha de caducidad
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="MM / YY"
+                    maxLength="7"
+                    className="flex border border-gray-300 h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border hover:border-solid hover:border-[#9b9ea3] focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b]"
+                    {...register("expDate", {
+                      required: "La fecha de caducidad es requerida",
+                      validate: validateExpDate,
+                    })}
+                    onInput={handleExpDateInput} // Aquí agregas la función para manejar el input
+                  />
+                  {errors.expDate ? (
+                    <span className="text-xs text-[#FF5555] max-w-[112.25px]">
+                      {errors.expDate.message}
+                    </span>
+                  ) : null}{" "}
+                </div>
+
+                <div className="flex flex-col w-[112.25px] min-h-[55px] gap-[3px]">
+                  <label htmlFor="CVC" className="text-xs font-normal">
+                    CVC
+                  </label>
+                  <input
+                    id="CVC"
+                    placeholder="123"
+                    className=" flex border border-gray-300  h-[36px] rounded-md border-solid box-border pl-[17px] font-normal text-xs leading-4 hover:border  hover:border-solid hover:border-[#9b9ea3]  focus:outline-none focus:border-2 focus:border-solid focus:border-[#3f8f6b] "
+                    type="text"
+                    maxLength={3}
+                    {...register("CVC", {
+                      required:  {
+                        value: true,
+                        message: "CVC requerido",
+                      },
+                      minLength:  {
+                        value: 3,
+                        message:
+                          "El CVC de la tarjeta debe tener al menos 3 numeros",
+                      },
+                      pattern:  {
+                        value: /^[0-9]{3}$/, // Valida que solo se ingresen 3 dígitos
+                        message: "CVC inválido, deben ser 3 números",
+                      },
+                    })}
+                  />
+                  {errors.CVC ? (
+                    <span className="text-xs text-[#FF5555] max-w-[112.25px]">
+                      {errors.CVC.message}
+                    </span>
+                  ) : null}{" "}
+                </div>
               </div>
             </div>
-          </div>:null}
+          )}
 
           <hr className=" w-full  border-solid border-[#e3ded7]" />
           {/* ///////////////////////////////segundo input///////////////////////////////////// */}
@@ -397,10 +394,12 @@ const PayMethod = () => {
               <p className="text-sm font-semibold leading-4">
                 Transferencia bancaria a la cuenta ES12 1234 1234 123457890
               </p>
-            { payMethod === "transferencia" ? <p className="text-sm font-normal leading-4">
-                Será necesario recibir el comprobante de la transferencia para
-                preparar tu pedido
-              </p>:null}
+              {payMethod === "transferencia" ? (
+                <p className="text-sm font-normal leading-4">
+                  Será necesario recibir el comprobante de la transferencia para
+                  preparar tu pedido
+                </p>
+              ) : null}
             </label>
           </div>
           {/* //////////////////////////////////////////////////////////////////// */}
@@ -420,18 +419,20 @@ const PayMethod = () => {
               htmlFor="bizum"
             >
               <p className="text-sm font-semibold leading-4">Bizum</p>
-             {payMethod === "bizum" ? <div className="flex  gap-3 justify-center items-center">
-                <p className="text-sm font-normal leading-4">
-                  Será necesario recibir el comprobante de la transferencia para
-                  preparar tu pedido
-                </p>
-                <Image
-                  src="/img/bizumIcon.png"
-                  width={70}
-                  height={31}
-                  alt="bizum icon"
-                />
-              </div>:null}
+              {payMethod === "bizum" ? (
+                <div className="flex  gap-3 justify-center items-center">
+                  <p className="text-sm font-normal leading-4">
+                    Será necesario recibir el comprobante de la transferencia
+                    para preparar tu pedido
+                  </p>
+                  <Image
+                    src="/img/bizumIcon.png"
+                    width={70}
+                    height={31}
+                    alt="bizum icon"
+                  />
+                </div>
+              ) : null}
             </label>
           </div>
 

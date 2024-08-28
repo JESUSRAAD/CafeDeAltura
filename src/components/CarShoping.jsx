@@ -26,8 +26,8 @@ const CarShoping = ({ arr, visibleCondition }) => {
     <div
       className={
         visibleCondition
-          ? " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white]  gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-16"
-          : " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white] invisible gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-16;"
+          ? " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white]  gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]"
+          : " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white] invisible gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]"
       }
     >
       <div className="text-center text-lg font-semibold leading-6 text-[#2a5b45]">

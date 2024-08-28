@@ -32,11 +32,11 @@ const HomeCards = ({acc,title,margin, link,titleArrow}) => {
   console.log(coffeData);
 
 
-const withMargin="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16 p-[40px]"
-const withOutMargin="flex flex-col items-center justify-center min-h-[603.39px] gap-10 "
+const withMargin="flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 mt-16 pt-[40px] pb-[40px]"
+const withOutMargin="flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 "
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       {loading ? (
         <p className="flex flex-col items-center justify-center min-h-[603.39px] gap-10 mt-16">Cargando...</p>
       ) : (
@@ -59,7 +59,7 @@ const withOutMargin="flex flex-col items-center justify-center min-h-[603.39px] 
          {link?<LinkArrow titleArrow={titleArrow} color={"black"} path={"/shop"}/>:null}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
