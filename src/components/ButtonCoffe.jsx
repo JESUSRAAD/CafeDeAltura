@@ -13,7 +13,7 @@ const linkPath = link || '#'
       case "green":
         return <Link href={linkPath}  onClick={action} className="flex items-center text-center py-3 px-6 min-h-[40px] justify-center max-w-fit text-white rounded font-semibold text-sm leading-4 bg-[#2a5b45]">{text}</Link>; 
       case "greenSmall":
-        return <Link href={linkPath} onClick={action} className="flex justify-center items-center min-w-[60px] min-h-[32px] text-[white] rounded text-sm font-semibold leading-4 bg-[#2a5b45b2] hover:bg-[#2a5b45] hover:cursor-pointer">{text}</Link>; 
+        return <Link href={linkPath} onClick={action} className="flex justify-center items-center min-w-[60px] min-h-[32px] text-[white] rounded text-sm font-semibold leading-4 bg-[#2a5b45b2]  group-hover:bg-[#2a5b45] group-hover:cursor-pointer">{text}</Link>; 
       case "agotado":
         return <Link href={linkPath} onClick={action} className="flex justify-center items-center min-w-[72px] min-h-[32px] text-[white] rounded text-sm font-semibold leading-4 bg-[#E3DED7] ">{text}</Link>; 
       case "gray":
