@@ -32,12 +32,8 @@ const CardCarShoping = ({
           </p>
         </div>
         <div className="flex flex-col justify-center gap-2 items-center">
-          {/* <button class="flex justify-center  items-center"> */}
-          <CirclePlus size={13} color="#2a5b45" onClick={plusAction} />
-          {/* </button> */}
-          {/* <button class="flex justify-center items-center text-black w-6 h-6"> */}
-          <CircleMinus size={13} color="#2a5b45" onClick={minusAction} />
-          {/* </button> */}
+          <CirclePlus className="cursor-pointer" size={13} color="#2a5b45" onClick={plusAction} />
+          <CircleMinus className="cursor-pointer" size={13} color="#2a5b45" po onClick={minusAction} />
         </div>
       </div>
     </div>
