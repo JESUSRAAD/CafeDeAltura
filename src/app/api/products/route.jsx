@@ -17,7 +17,7 @@ export const  GET=async()=> {
     const products = await db.collection("products").find({}).toArray();
     return addCorsHeaders(NextResponse.json(products));
   } catch (e) {
-    console.error(e);
+  
     return addCorsHeaders(NextResponse.json({ error: 'Error al obtener productos' }, { status: 500 }));
   }
 }
@@ -31,7 +31,7 @@ export const  POST=async(request)=> {
     await db.collection("products").insertOne(product);
     return addCorsHeaders(NextResponse.json(product));
   } catch (e) {
-    console.error(e);
+    
     return addCorsHeaders(NextResponse.json({ error: 'Error al crear producto' }, { status: 500 }));
   }
 }
