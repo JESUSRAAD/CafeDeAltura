@@ -81,7 +81,6 @@ const PayMethod = () => {
       reset();
       return result;
     });
-    console.log(payForm);
     alert("Datos enviados");
     router.push("/success"); // Redirige a la página /success
   });
@@ -208,7 +207,6 @@ const PayMethod = () => {
   };
   const payMethod = watch("payMethod");
 
-  console.log(valuesBox);
 
   return (
     <section className="flex flex-col  items-center min-h-screen gap-6 mt-16 p-10">

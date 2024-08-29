@@ -66,7 +66,7 @@ const BasketSection = () => {
 
   setIVA(IVATotalFun().toFixed(2) + " €");
   setSend(watch("send"));
-  console.log(valuesBox);
+  
 
   const saveValues = () => {
     setValuesBox({
