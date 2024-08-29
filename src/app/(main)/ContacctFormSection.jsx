@@ -172,7 +172,7 @@ const ContacctFormSection = () => {
                 {...register("conditions", {
                   required: {
                     value: true,
-                    message: "Conditions de  Política y Términos requeridos",
+                    message: "Condiciones de  Política y Términos requeridos",
                   },
                 })}
                 className="shadow-[0px_1px_2px_0px_#0000000d] accent-[#2a5b45]  border border-gray-300 w-4 h-4 rounded border-solid"
