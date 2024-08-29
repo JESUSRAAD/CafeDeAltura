@@ -38,7 +38,6 @@ const HomeCardCoffe = ({ _id, brand, img, price, available }) => {
     });
   };
 
-  console.log(coffeChoiced);
 
   return (
     <>

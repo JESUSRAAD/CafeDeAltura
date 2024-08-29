@@ -23,7 +23,6 @@ const ContacctFormSection = () => {
     });
     const ceatedListUser = JSON.parse(localStorage.getItem("users")) || [];
     setCoffeUsers(ceatedListUser);
-    console.log(coffeUsers);
     alert("Datos enviados");
   });
 
