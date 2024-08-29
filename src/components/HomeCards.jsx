@@ -18,9 +18,7 @@ const HomeCards = ({ acc, title, margin, link, titleArrow }) => {
         const data = await response.json();
         setCoffeData(data);
         setLoading(false);
-        console.log(data);
       } catch (error) {
-        console.log(error);
         setLoading(false);
       }
     };
@@ -28,7 +26,6 @@ const HomeCards = ({ acc, title, margin, link, titleArrow }) => {
     getCoffeFetch();
   }, []);
 
-  console.log(coffeData);
 
   const withMargin =
     "flex flex-col items-center justify-center max-w-[1200px] min-h-[603.39px] gap-10 mt-16 pt-[40px] pb-[40px]";
